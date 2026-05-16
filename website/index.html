@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Altitude | CanSat Team</title>
+    <meta name="description" content="Altitude is a CanSat team from Haberdashers' Boys' School competing in the 2026/2027 season.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="index.html" aria-label="Altitude home">
+          <img src="../assets/images/Team Altitude Logo.png" alt="Team Altitude logo">
+          <span>Altitude<small>Haberdashers' Boys' School</small></span>
+        </a>
+        <div class="header-actions">
+          <nav class="nav" aria-label="Primary navigation">
+            <span class="nav-indicator" aria-hidden="true"></span>
+            <a href="index.html">Home</a>
+            <a href="team.html">Team</a>
+            <a href="cansat.html">CanSat</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <div class="edge-accent edge-accent--left" aria-hidden="true"></div>
+    <div class="edge-accent edge-accent--right" aria-hidden="true"></div>
+
+    <nav class="section-jump section-jump--left" aria-label="Home page sections">
+      <a class="section-jump__card glass-panel" href="#home">
+        <span>01</span>
+        <strong>Home</strong>
+        <small>Team overview</small>
+      </a>
+      <a class="section-jump__card glass-panel" href="#competition">
+        <span>02</span>
+        <strong>Competition</strong>
+        <small>CanSat brief</small>
+      </a>
+      <a class="section-jump__card glass-panel" href="#explore">
+        <span>03</span>
+        <strong>Explore</strong>
+        <small>Project pages</small>
+      </a>
+      <a class="section-jump__card glass-panel" href="#school">
+        <span>04</span>
+        <strong>School</strong>
+        <small>Hertfordshire base</small>
+      </a>
+    </nav>
+
+    <main class="site-main">
+      <section class="hero" id="home">
+        <div class="hero__copy" data-reveal>
+          <h1>Altitude</h1>
+          <p class="hero__lead">A CanSat team from Haberdashers' Boys' School in Hertfordshire, building for the 2026/2027 season with code, CAD, careful fabrication, and a lot of testing.</p>
+          <div class="hero__actions">
+            <a class="button button--accent button--icon" href="team.html">Meet the team</a>
+            <a class="button button--icon" href="cansat.html">See the CanSat</a>
+          </div>
+        </div>
+
+        <aside class="hero-card glass-panel" data-reveal>
+          <img class="hero-card__logo" src="../assets/images/Team Altitude Logo.png" alt="Team Altitude logo">
+          <div class="hero-card__meta">
+            <div class="meta-row">
+              <strong>Season</strong>
+              <span>2026/2027</span>
+            </div>
+            <div class="meta-row">
+              <strong>School</strong>
+              <span>Haberdashers' Boys' School, Hertfordshire</span>
+            </div>
+            <div class="meta-row">
+              <strong>Core</strong>
+              <span>[unknown]</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section section--tight" id="competition">
+        <div class="split">
+          <article class="copy-panel glass-panel" data-reveal>
+            <div class="section__head">
+              <h2>The CanSat Competition</h2>
+              <p>CanSat challenges teams to design a working satellite system small enough to fit inside a drinks-can-sized volume.</p>
+            </div>
+            <p>Altitude's job is to turn a compact payload into a complete engineering project: structure, electronics, software, testing, documentation, and a mission that can survive launch and descent.</p>
+            <p>The competition rewards teams that can combine reliable hardware with clear decision-making. That means every design choice needs evidence, from print materials and mounting points to sensor logging and recovery workflow.</p>
+          </article>
+
+          <div class="stat-grid">
+            <article class="stat-panel glass-panel" data-reveal>
+              <strong>4</strong>
+              <span>Team members covering leadership, code, CAD, build, and documentation.</span>
+            </article>
+            <article class="stat-panel glass-panel" data-reveal>
+              <strong>1</strong>
+              <span>Integrated CanSat system built around a compact Arduino-controlled payload.</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="explore">
+        <div class="section__head" data-reveal>
+          <h2>Explore Altitude</h2>
+          <p>Use these pages as the project hub for the people, the hardware, and the design decisions behind the satellite.</p>
+        </div>
+        <div class="link-grid">
+          <article class="link-panel glass-panel" data-reveal>
+            <div>
+              <h3>Team</h3>
+              <p>Eric, Lewis, Sebastian, and Kamran, with roles split across code, CAD, build, leadership, and notebook.</p>
+            </div>
+            <a class="link-panel__arrow" href="team.html" aria-label="Open the team page"><span class="sr-only">Open the team page</span></a>
+          </article>
+          <article class="link-panel glass-panel" data-reveal>
+            <div>
+              <h3>CanSat</h3>
+              <p>The Arduino Uno R3 controller, Bambu Lab X2D fabrication workflow, AMS hardware, and ASA Aero, TPU 90A, and PETG CF filaments used to build the payload.</p>
+            </div>
+            <a class="link-panel__arrow" href="cansat.html" aria-label="Open the CanSat page"><span class="sr-only">Open the CanSat page</span></a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="school">
+        <article class="school-strip glass-panel" data-reveal>
+          <img src="../assets/images/Haberdashers' Boys' School Logo.png" alt="Haberdashers' Boys' School logo">
+          <div>
+            <h2>Based in Hertfordshire</h2>
+            <p>Altitude represents Haberdashers' Boys' School, bringing classroom engineering into a real mission workflow for the 2026/2027 CanSat season.</p>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Altitude CanSat Team</span>
+      <span>2026/2027 Season</span>
+    </footer>
+
+    <svg class="sr-only" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.005 0.005" numOctaves="2" seed="92" result="noise"></feTurbulence>
+          <feGaussianBlur in="noise" stdDeviation="2" result="blurred"></feGaussianBlur>
+          <feDisplacementMap in="SourceGraphic" in2="blurred" scale="19" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+        </filter>
+      </defs>
+    </svg>
+
+    <script src="app.js"></script>
+  </body>
+</html>

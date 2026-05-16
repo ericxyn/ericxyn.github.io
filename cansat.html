@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Altitude | CanSat</title>
+    <meta name="description" content="Explore the devices and fabrication workflow behind Altitude's CanSat.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="index.html" aria-label="Altitude home">
+          <img src="Team Altitude Logo.png" alt="Team Altitude logo">
+          <span>Altitude<small>Haberdashers' Boys' School</small></span>
+        </a>
+        <div class="header-actions">
+          <nav class="nav" aria-label="Primary navigation">
+            <span class="nav-indicator" aria-hidden="true"></span>
+            <a href="index.html">Home</a>
+            <a href="team.html">Team</a>
+            <a href="cansat.html">CanSat</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <div class="edge-accent edge-accent--left" aria-hidden="true"></div>
+    <div class="edge-accent edge-accent--right" aria-hidden="true"></div>
+
+    <nav class="section-jump section-jump--left" aria-label="CanSat page sections">
+      <a class="section-jump__card glass-panel" href="#cansat-overview">
+        <span>01</span>
+        <strong>Overview</strong>
+        <small>Payload summary</small>
+      </a>
+      <a class="section-jump__card glass-panel" href="#hardware">
+        <span>02</span>
+        <strong>Hardware</strong>
+        <small>Devices used</small>
+      </a>
+    </nav>
+
+    <nav class="section-jump section-jump--right" aria-label="More CanSat page sections">
+      <a class="section-jump__card glass-panel" href="#materials">
+        <span>03</span>
+        <strong>Materials</strong>
+        <small>Print choices</small>
+      </a>
+      <a class="section-jump__card glass-panel" href="#workflow">
+        <span>04</span>
+        <strong>Workflow</strong>
+        <small>Build process</small>
+      </a>
+    </nav>
+
+    <main class="site-main">
+      <section class="hero hero--compact" id="cansat-overview">
+        <div class="hero__copy" data-reveal>
+          <h1 class="page-title">CanSat</h1>
+          <p class="hero__lead">Altitude's satellite is built around an Arduino Uno R3 controller and a repeatable 3D-printing workflow using Bambu Lab hardware.</p>
+        </div>
+        <aside class="hero-card glass-panel" data-reveal>
+          <div class="hero-card__meta">
+            <div class="meta-row">
+              <strong>Controller</strong>
+              <span>Arduino Uno R3 Microcontroller</span>
+            </div>
+            <div class="meta-row">
+              <strong>Fabrication</strong>
+              <span>Bambu Lab X2D Printer Combo, AMS 2 Pro, and two AMS HT dryers</span>
+            </div>
+            <div class="meta-row">
+              <strong>Filament</strong>
+              <span>ASA Aero, TPU 90A, and PETG CF</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section section--tight" id="hardware">
+        <div class="section__head" data-reveal>
+          <h2>Mission Hardware</h2>
+          <p>The devices below support the two sides of the payload: embedded control and a controlled fabrication workflow.</p>
+        </div>
+
+        <div class="device-grid">
+          <article class="device-card glass-panel" data-reveal>
+            <div class="device-card__image">
+              <img src="Arduino Uno R3.jpg" alt="Arduino Uno R3 Microcontroller">
+            </div>
+            <h3>Arduino Uno R3</h3>
+            <p>The Uno R3 is the CanSat's microcontroller platform. It is used to run mission code, coordinate sensor readings, manage timing, and provide a clear, testable control layer for the payload.</p>
+          </article>
+
+          <article class="device-card glass-panel" data-reveal>
+            <div class="device-card__image">
+              <img src="Bambu Lab X2D.png" alt="Bambu Lab X2D 3D Printer Combo">
+            </div>
+            <h3>Bambu Lab X2D Printer Combo</h3>
+            <p>The X2D printer combo is used with the AMS hardware to manufacture the CanSat structure, fixtures, test pieces, and revised CAD iterations. Fast printing helps the team test fit and strength before finalising a design.</p>
+          </article>
+
+          <article class="device-card glass-panel" data-reveal>
+            <div class="device-card__image device-card__image--cover">
+              <img src="Bambu Lab AMS HT.jpg" alt="Bambu Lab AMS HT Filament Dryer">
+            </div>
+            <h3>AMS Fabrication System</h3>
+            <p>The AMS 2 Pro and two AMS HT dryers are part of the fabrication process. They manage multi-material printing and keep engineering filaments dry for consistent structural parts.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="materials">
+        <div class="feature-line">
+          <article class="stat-panel glass-panel" data-reveal>
+            <strong>Filaments</strong>
+            <span>ASA Aero, TPU 90A, and PETG CF give the team options for lightweight structure, flexible parts, and carbon-fibre-reinforced prints.</span>
+          </article>
+          <article class="stat-panel glass-panel" data-reveal>
+            <strong>CAD</strong>
+            <span>Lets the team tune clearances, board mounts, wall thickness, and parachute or recovery interfaces before printing.</span>
+          </article>
+          <article class="stat-panel glass-panel" data-reveal>
+            <strong>Tests</strong>
+            <span>Every printed iteration can be handled, checked, revised, and documented before the final competition build.</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="workflow">
+        <div class="section__head" data-reveal>
+          <h2>Build Workflow</h2>
+          <p>The project moves from model to print to electronics integration, with notebook evidence collected along the way.</p>
+        </div>
+        <div class="process-grid">
+          <article class="process-card glass-panel" data-reveal>
+            <span>1</span>
+            <h3>Design</h3>
+            <p>CAD defines the CanSat body, internal mounts, access points, and recovery interfaces.</p>
+          </article>
+          <article class="process-card glass-panel" data-reveal>
+            <span>2</span>
+            <h3>Print</h3>
+            <p>The X2D, AMS 2 Pro, and AMS HT dryers produce prototypes and final parts with controlled ASA Aero, TPU 90A, and PETG CF handling.</p>
+          </article>
+          <article class="process-card glass-panel" data-reveal>
+            <span>3</span>
+            <h3>Integrate</h3>
+            <p>The Arduino platform and payload electronics are fitted, wired, and checked against the physical layout.</p>
+          </article>
+          <article class="process-card glass-panel" data-reveal>
+            <span>4</span>
+            <h3>Document</h3>
+            <p>Testing, failures, changes, and final decisions are recorded in the engineering notebook.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Altitude CanSat Team</span>
+      <span>Arduino + Bambu Lab build workflow</span>
+    </footer>
+
+    <svg class="sr-only" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.005 0.005" numOctaves="2" seed="92" result="noise"></feTurbulence>
+          <feGaussianBlur in="noise" stdDeviation="2" result="blurred"></feGaussianBlur>
+          <feDisplacementMap in="SourceGraphic" in2="blurred" scale="19" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+        </filter>
+      </defs>
+    </svg>
+
+    <script src="app.js"></script>
+  </body>
+</html>

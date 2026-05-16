@@ -10,8 +10,10 @@ const currentPage = window.location.pathname.split("/").pop() || "index.html";
 const pageIndexes = new Map([
   ["index.html", 0],
   ["", 0],
+  ["about-altitude.html", 0],
   ["team.html", 1],
   ["cansat.html", 2],
+  ["about-cansat.html", 2],
 ]);
 const activeIndex = pageIndexes.get(currentPage) ?? 0;
 let selectedIndex = activeIndex;
@@ -35,7 +37,9 @@ navLinks.forEach((link) => {
       return;
     }
 
-    if (linkIndex === undefined || linkIndex === selectedIndex) {
+    const isSamePage = linkPage === currentPage || (currentPage === "" && linkPage === "index.html");
+
+    if (linkIndex === undefined || (linkIndex === selectedIndex && isSamePage)) {
       return;
     }
 

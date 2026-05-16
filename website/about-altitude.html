@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Altitude | About Altitude</title>
+    <meta name="description" content="Learn about Altitude, the student-led CanSat team from Haberdashers' Boys' School.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="index.html" aria-label="Altitude home">
+          <img src="../assets/images/Team Altitude Logo.png" alt="Team Altitude logo">
+          <span>Altitude<small>Haberdashers' Boys' School</small></span>
+        </a>
+        <div class="header-actions">
+          <nav class="nav" aria-label="Primary navigation">
+            <span class="nav-indicator" aria-hidden="true"></span>
+            <a href="index.html">Home</a>
+            <a href="team.html">Team</a>
+            <a href="cansat.html">CanSat</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <div class="edge-accent edge-accent--left" aria-hidden="true"></div>
+    <div class="edge-accent edge-accent--right" aria-hidden="true"></div>
+
+    <nav class="section-jump section-jump--left" aria-label="About Altitude sections">
+      <a class="section-jump__card glass-panel" href="#about-altitude">
+        <span>01</span>
+        <strong>Altitude</strong>
+        <small>Team mission</small>
+      </a>
+      <a class="section-jump__card glass-panel" href="#project-focus">
+        <span>02</span>
+        <strong>Focus</strong>
+        <small>Engineering</small>
+      </a>
+      <a class="section-jump__card glass-panel" href="#disciplines">
+        <span>03</span>
+        <strong>Fields</strong>
+        <small>Core skills</small>
+      </a>
+    </nav>
+
+    <main class="site-main">
+      <section class="hero hero--compact" id="about-altitude">
+        <div class="hero__copy" data-reveal>
+          <h1 class="page-title">About Altitude</h1>
+          <p class="hero__lead">Altitude is a student-led CanSat team based at Haberdashers' Boys' School, focused on aerospace engineering, embedded systems, and high-performance mission design.</p>
+        </div>
+        <aside class="hero-card glass-panel" data-reveal>
+          <img class="hero-card__logo" src="../assets/images/Team Altitude Logo.png" alt="Team Altitude logo">
+          <div class="hero-card__meta">
+            <div class="meta-row">
+              <strong>Team</strong>
+              <span>Eric, Lewis, Sebastian, and Kamran</span>
+            </div>
+            <div class="meta-row">
+              <strong>Season</strong>
+              <span>2026/2027</span>
+            </div>
+            <div class="meta-row">
+              <strong>Mission</strong>
+              <span>Autonomous CanSat payload</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section section--tight" id="project-focus">
+        <article class="copy-panel copy-panel--wide glass-panel" data-reveal>
+          <div class="section__head">
+            <h2>Our Project</h2>
+            <p>A hands-on engineering challenge built around space technology and problem solving.</p>
+          </div>
+          <p>Our team was formed through a shared passion for space technology, engineering innovation, and hands-on problem solving. Through the CanSat competition, we aim to design and develop a fully autonomous miniature satellite capable of performing complex data collection and telemetry tasks during flight.</p>
+          <p>Altitude brings together coding, CAD, fabrication, build work, team leadership, and notebook documentation. The project asks the team to make practical decisions, test them carefully, and explain the evidence behind each iteration.</p>
+        </article>
+      </section>
+
+      <section class="section" id="disciplines">
+        <div class="section__head" data-reveal>
+          <h2>What Altitude Combines</h2>
+          <p>The project links multiple engineering disciplines into a single mission workflow.</p>
+        </div>
+        <div class="content-grid">
+          <article class="copy-panel glass-panel" data-reveal>
+            <ul class="content-list">
+              <li>Aerospace systems</li>
+              <li>Electronics and PCB development</li>
+              <li>Embedded programming</li>
+              <li>Telemetry and communications</li>
+              <li>Structural and mechanical design</li>
+              <li>Data processing and visualisation</li>
+            </ul>
+          </article>
+          <div class="content-stack">
+            <article class="stat-panel glass-panel" data-reveal>
+              <strong>STEM</strong>
+              <span>Altitude is an opportunity to connect school engineering with a real aerospace-style system.</span>
+            </article>
+            <article class="stat-panel glass-panel" data-reveal>
+              <strong>Build</strong>
+              <span>The team turns ideas into CAD, printed parts, electronics tests, software, and documented results.</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <article class="school-strip glass-panel" data-reveal>
+          <img src="../assets/images/Haberdashers' Boys' School Logo.png" alt="Haberdashers' Boys' School logo">
+          <div>
+            <h2>Future Innovation</h2>
+            <p>Altitude is not only a technical challenge, but also an opportunity to inspire future innovation and expand access to STEM education through outreach, collaboration, and real-world engineering experience.</p>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Altitude CanSat Team</span>
+      <span>About the team mission</span>
+    </footer>
+
+    <svg class="sr-only" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.005 0.005" numOctaves="2" seed="92" result="noise"></feTurbulence>
+          <feGaussianBlur in="noise" stdDeviation="2" result="blurred"></feGaussianBlur>
+          <feDisplacementMap in="SourceGraphic" in2="blurred" scale="19" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+        </filter>
+      </defs>
+    </svg>
+
+    <script src="app.js"></script>
+  </body>
+</html>

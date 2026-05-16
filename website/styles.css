@@ -579,9 +579,38 @@ p {
   gap: 18px;
 }
 
+.copy-panel--wide {
+  max-width: 1040px;
+}
+
 .copy-panel p {
   color: var(--ink-soft);
   font-size: 1.02rem;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.48fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.content-stack {
+  display: grid;
+  gap: 18px;
+}
+
+.content-list {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding-left: 1.3rem;
+  color: var(--ink-soft);
+  font-weight: 620;
+}
+
+.content-list li::marker {
+  color: var(--accent-strong);
 }
 
 .stat-grid {
@@ -785,6 +814,8 @@ p {
   height: 100%;
   object-fit: contain;
   padding: 18px;
+  transform: scale(0.78);
+  transform-origin: center;
 }
 
 .device-card__image--cover img {
@@ -917,6 +948,7 @@ p {
   .hero,
   .hero--compact,
   .split,
+  .content-grid,
   .school-strip {
     grid-template-columns: 1fr;
   }

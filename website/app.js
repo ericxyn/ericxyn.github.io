@@ -10,7 +10,7 @@ const navPages = [
   { href: "index.html", label: "Home" },
   { href: "team.html", label: "Team" },
   { href: "cansat.html", label: "CanSat" },
-  { href: "about-altitude.html", label: "Altitude", ariaLabel: "About Altitude" },
+  { href: "about-altitude.html", label: "About", ariaLabel: "About Altitude" },
   { href: "about-cansat.html", label: "Competition", ariaLabel: "About CanSat" },
 ];
 const pageIndexes = new Map(navPages.map((page, index) => [page.href, index]));

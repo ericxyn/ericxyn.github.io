@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Altitude | 404</title>
+    <meta name="description" content="Error 404 - Page Not Found">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <style>
+      @font-face {
+        font-family: "Montserrat";
+        src: url("/assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf") format("truetype");
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      :root {
+        --sky: #8cd4fa;
+        --silver: #c9d2d7;
+        --silver-deep: #aebbc2;
+        --white: #ffffff;
+        --ink: #101820;
+        --scroll-y: 0px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        min-height: 100%;
+        background: var(--sky);
+        scroll-behavior: auto;
+      }
+
+      body {
+        margin: 0;
+        min-height: 460vh;
+        color: var(--ink);
+        background: var(--sky);
+        font-family: "Montserrat", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        overflow-x: hidden;
+      }
+
+      .sky {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.36), transparent 25vw),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 46%),
+          var(--sky);
+      }
+
+      .cloud-field {
+        position: absolute;
+        inset: -64vh -14vw;
+        min-height: 270vh;
+        transform: translate3d(0, calc(var(--scroll-y) * -0.18), 0);
+        will-change: transform;
+      }
+
+      .cloud-field--far {
+        opacity: 0.64;
+        transform: translate3d(0, calc(var(--scroll-y) * -0.1), 0) scale(1.08);
+      }
+
+      .cloud {
+        position: absolute;
+        left: var(--x);
+        top: calc(var(--y) + var(--loop-offset, 0px));
+        width: var(--w);
+        height: calc(var(--w) * 0.26);
+        border-radius: 999px;
+        background: linear-gradient(180deg, var(--white) 0%, #eef3f6 58%, var(--silver) 100%);
+        box-shadow: 0 28px 34px rgba(86, 112, 126, 0.15);
+        opacity: var(--o);
+        transform: scale(var(--s));
+      }
+
+      .cloud::before,
+      .cloud::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        background: inherit;
+      }
+
+      .cloud::before {
+        width: 56%;
+        height: 110%;
+        left: 18%;
+        top: -46%;
+        background: linear-gradient(180deg, var(--white), #eef3f6 72%, var(--silver));
+      }
+
+      .cloud::after {
+        width: 38%;
+        height: 92%;
+        right: 12%;
+        top: -28%;
+        background: linear-gradient(180deg, var(--white), #eef3f6 68%, var(--silver-deep));
+      }
+
+      .cloud-band {
+        --loop-offset: 0px;
+      }
+
+      .cloud-band--next {
+        --loop-offset: 125vh;
+      }
+
+      .cloud-band--last {
+        --loop-offset: 250vh;
+      }
+
+      .error-panel {
+        position: fixed;
+        inset: 0;
+        z-index: 5;
+        display: grid;
+        place-items: center;
+        padding: 28px;
+        text-align: center;
+        pointer-events: none;
+      }
+
+      .error-panel__inner {
+        max-width: min(860px, 92vw);
+      }
+
+      h1 {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.96);
+        font-size: clamp(3.4rem, 9vw, 8.8rem);
+        line-height: 0.92;
+        font-weight: 900;
+        letter-spacing: 0;
+        text-shadow:
+          0 0 10px rgba(255, 255, 255, 0.86),
+          0 0 32px rgba(255, 255, 255, 0.58),
+          0 18px 48px rgba(28, 67, 90, 0.26);
+      }
+
+      .home-link {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        z-index: 8;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 0 20px;
+        border: 1px solid rgba(255, 255, 255, 0.58);
+        border-radius: 999px;
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.42);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.72),
+          0 16px 36px rgba(28, 67, 90, 0.16);
+        font-size: 0.9rem;
+        font-weight: 800;
+        text-decoration: none;
+        backdrop-filter: blur(12px);
+      }
+
+      .scroll-hint {
+        position: fixed;
+        left: 24px;
+        bottom: 28px;
+        z-index: 8;
+        color: rgba(16, 24, 32, 0.58);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      @media (max-width: 720px) {
+        body {
+          min-height: 420vh;
+        }
+
+        .cloud-field {
+          inset-inline: -72vw;
+        }
+
+        .cloud {
+          width: calc(var(--w) * 0.86);
+        }
+
+        .home-link {
+          right: 14px;
+          bottom: 14px;
+        }
+
+        .scroll-hint {
+          left: 14px;
+          bottom: 18px;
+          max-width: 150px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .cloud-field {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="sky" aria-label="Error 404 - Page Not Found">
+      <div class="cloud-field cloud-field--far" aria-hidden="true">
+        <div class="cloud-band">
+          <span class="cloud" style="--x: 5%; --y: 9vh; --w: 240px; --s: 1.1; --o: 0.58;"></span>
+          <span class="cloud" style="--x: 44%; --y: 18vh; --w: 340px; --s: 0.82; --o: 0.5;"></span>
+          <span class="cloud" style="--x: 72%; --y: 45vh; --w: 300px; --s: 1; --o: 0.62;"></span>
+          <span class="cloud" style="--x: 18%; --y: 84vh; --w: 380px; --s: 0.92; --o: 0.54;"></span>
+          <span class="cloud" style="--x: 62%; --y: 112vh; --w: 250px; --s: 1.12; --o: 0.46;"></span>
+        </div>
+        <div class="cloud-band cloud-band--next">
+          <span class="cloud" style="--x: 5%; --y: 9vh; --w: 240px; --s: 1.1; --o: 0.58;"></span>
+          <span class="cloud" style="--x: 44%; --y: 18vh; --w: 340px; --s: 0.82; --o: 0.5;"></span>
+          <span class="cloud" style="--x: 72%; --y: 45vh; --w: 300px; --s: 1; --o: 0.62;"></span>
+          <span class="cloud" style="--x: 18%; --y: 84vh; --w: 380px; --s: 0.92; --o: 0.54;"></span>
+          <span class="cloud" style="--x: 62%; --y: 112vh; --w: 250px; --s: 1.12; --o: 0.46;"></span>
+        </div>
+        <div class="cloud-band cloud-band--last">
+          <span class="cloud" style="--x: 5%; --y: 9vh; --w: 240px; --s: 1.1; --o: 0.58;"></span>
+          <span class="cloud" style="--x: 44%; --y: 18vh; --w: 340px; --s: 0.82; --o: 0.5;"></span>
+          <span class="cloud" style="--x: 72%; --y: 45vh; --w: 300px; --s: 1; --o: 0.62;"></span>
+          <span class="cloud" style="--x: 18%; --y: 84vh; --w: 380px; --s: 0.92; --o: 0.54;"></span>
+          <span class="cloud" style="--x: 62%; --y: 112vh; --w: 250px; --s: 1.12; --o: 0.46;"></span>
+        </div>
+      </div>
+
+      <div class="cloud-field cloud-field--near" aria-hidden="true">
+        <div class="cloud-band">
+          <span class="cloud" style="--x: -2%; --y: 24vh; --w: 430px; --s: 1.1; --o: 0.9;"></span>
+          <span class="cloud" style="--x: 68%; --y: 66vh; --w: 460px; --s: 1; --o: 0.88;"></span>
+          <span class="cloud" style="--x: 16%; --y: 128vh; --w: 520px; --s: 0.94; --o: 0.92;"></span>
+          <span class="cloud" style="--x: 54%; --y: 178vh; --w: 390px; --s: 1.18; --o: 0.86;"></span>
+        </div>
+        <div class="cloud-band cloud-band--next">
+          <span class="cloud" style="--x: -2%; --y: 24vh; --w: 430px; --s: 1.1; --o: 0.9;"></span>
+          <span class="cloud" style="--x: 68%; --y: 66vh; --w: 460px; --s: 1; --o: 0.88;"></span>
+          <span class="cloud" style="--x: 16%; --y: 128vh; --w: 520px; --s: 0.94; --o: 0.92;"></span>
+          <span class="cloud" style="--x: 54%; --y: 178vh; --w: 390px; --s: 1.18; --o: 0.86;"></span>
+        </div>
+        <div class="cloud-band cloud-band--last">
+          <span class="cloud" style="--x: -2%; --y: 24vh; --w: 430px; --s: 1.1; --o: 0.9;"></span>
+          <span class="cloud" style="--x: 68%; --y: 66vh; --w: 460px; --s: 1; --o: 0.88;"></span>
+          <span class="cloud" style="--x: 16%; --y: 128vh; --w: 520px; --s: 0.94; --o: 0.92;"></span>
+          <span class="cloud" style="--x: 54%; --y: 178vh; --w: 390px; --s: 1.18; --o: 0.86;"></span>
+        </div>
+      </div>
+
+      <section class="error-panel">
+        <div class="error-panel__inner">
+          <h1>Error 404 - Page Not Found</h1>
+        </div>
+      </section>
+
+      <span class="scroll-hint">Scroll through the clouds</span>
+      <a class="home-link" href="/website/index.html">Return home</a>
+    </main>
+
+    <script>
+      const root = document.documentElement;
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let loopStart = 0;
+      let loopEnd = 0;
+      let ticking = false;
+
+      function setLoopBounds() {
+        loopStart = Math.round(window.innerHeight * 1.25);
+        loopEnd = Math.round(window.innerHeight * 3.75);
+      }
+
+      function paint() {
+        root.style.setProperty("--scroll-y", `${window.scrollY}px`);
+        ticking = false;
+      }
+
+      function syncScroll() {
+        if (!ticking) {
+          window.requestAnimationFrame(paint);
+          ticking = true;
+        }
+
+        if (reducedMotion) return;
+
+        if (window.scrollY < loopStart * 0.35) {
+          window.scrollTo(0, window.scrollY + (loopEnd - loopStart));
+        } else if (window.scrollY > loopEnd) {
+          window.scrollTo(0, window.scrollY - (loopEnd - loopStart));
+        }
+      }
+
+      window.addEventListener("resize", setLoopBounds);
+      window.addEventListener("scroll", syncScroll, { passive: true });
+      window.addEventListener("load", () => {
+        setLoopBounds();
+        if (!reducedMotion) window.scrollTo(0, loopStart);
+        paint();
+      });
+    </script>
+  </body>
+</html>

@@ -93,10 +93,15 @@ p {
 .scroll-progress {
   position: fixed;
   inset: 0 auto auto 0;
-  z-index: 80;
+  z-index: 90;
   width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--accent), #ffffff);
+  height: clamp(8px, 0.75vw, 11px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), transparent 44%),
+    linear-gradient(90deg, var(--accent), #ffffff 52%, var(--accent));
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.42) inset,
+    0 8px 22px rgba(64, 172, 229, 0.32);
   transform: scaleX(0);
   transform-origin: left center;
 }
@@ -574,6 +579,7 @@ p {
 .device-card,
 .process-card,
 .school-strip {
+  min-width: 0;
   padding: clamp(22px, 3vw, 34px);
   border-radius: var(--radius);
 }
@@ -637,7 +643,7 @@ p {
 
 .link-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: var(--panel-gap);
 }
 
@@ -794,13 +800,14 @@ p {
 
 .device-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 315px), 1fr));
   gap: var(--panel-gap);
 }
 
 .device-card {
   display: grid;
   gap: 20px;
+  align-content: start;
 }
 
 .device-card__image {
@@ -829,7 +836,7 @@ p {
 
 .process-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
   gap: var(--panel-gap);
 }
 
@@ -852,7 +859,7 @@ p {
 
 .feature-line {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: var(--panel-gap);
 }
 
@@ -919,6 +926,67 @@ p {
   .section-jump__card {
     min-height: 72px;
     padding: 14px 16px;
+  }
+}
+
+@media (max-width: 1180px) {
+  :root {
+    --panel-gap: 22px;
+  }
+
+  .site-header__inner {
+    gap: 18px;
+  }
+
+  .brand img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .nav {
+    grid-template-columns: repeat(var(--page-count), minmax(82px, 1fr));
+    width: min(100%, 650px);
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 0.95fr) minmax(290px, 0.62fr);
+    gap: 34px;
+  }
+
+  .hero--compact,
+  .split,
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 7.3rem;
+  }
+
+  .page-title {
+    font-size: 6rem;
+  }
+
+  .section__head h2 {
+    font-size: 4rem;
+  }
+
+  .person-card,
+  .person-card:nth-child(even) {
+    grid-template-columns: minmax(220px, 0.62fr) minmax(0, 1fr);
+    gap: 26px;
+  }
+
+  .person-card:nth-child(even) .person-photo {
+    order: 2;
+  }
+
+  .school-strip {
+    grid-template-columns: 150px minmax(0, 1fr);
+  }
+
+  .school-strip img {
+    width: 150px;
   }
 }
 
@@ -993,13 +1061,6 @@ p {
 
   .hero-card__logo {
     width: min(64vw, 240px);
-  }
-
-  .link-grid,
-  .device-grid,
-  .process-grid,
-  .feature-line {
-    grid-template-columns: 1fr;
   }
 
   .person-card,
@@ -1111,6 +1172,13 @@ p {
 
   .device-card__image {
     min-height: 215px;
+  }
+
+  .link-grid,
+  .device-grid,
+  .process-grid,
+  .feature-line {
+    grid-template-columns: 1fr;
   }
 
   .footer {

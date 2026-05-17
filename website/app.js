@@ -2,24 +2,44 @@ const body = document.body;
 const progress = document.querySelector(".scroll-progress");
 const revealNodes = document.querySelectorAll("[data-reveal]");
 const nav = document.querySelector(".nav");
-const navLinks = document.querySelectorAll(".nav a");
 const arrowLinks = document.querySelectorAll(".link-panel__arrow[href]");
 const glassPanels = document.querySelectorAll(".glass-panel");
 
 const currentPage = window.location.pathname.split("/").pop() || "index.html";
-const pageIndexes = new Map([
-  ["index.html", 0],
-  ["", 0],
-  ["team.html", 1],
-  ["cansat.html", 2],
-  ["about-altitude.html", 3],
-  ["about-cansat.html", 4],
-]);
+const navPages = [
+  { href: "index.html", label: "Home" },
+  { href: "team.html", label: "Team" },
+  { href: "cansat.html", label: "CanSat" },
+  { href: "about-altitude.html", label: "Altitude", ariaLabel: "About Altitude" },
+  { href: "about-cansat.html", label: "Competition", ariaLabel: "About CanSat" },
+];
+const pageIndexes = new Map(navPages.map((page, index) => [page.href, index]));
+pageIndexes.set("", 0);
 const activeIndex = pageIndexes.get(currentPage) ?? 0;
 let selectedIndex = activeIndex;
 let pendingNavigation = 0;
+let navLinks = [];
 
 if (nav) {
+  let indicator = nav.querySelector(".nav-indicator");
+
+  if (!indicator) {
+    indicator = document.createElement("span");
+    indicator.className = "nav-indicator";
+    indicator.setAttribute("aria-hidden", "true");
+  }
+
+  nav.replaceChildren(indicator);
+  navPages.forEach((page) => {
+    const link = document.createElement("a");
+    link.setAttribute("href", page.href);
+    link.textContent = page.label;
+    if (page.ariaLabel) link.setAttribute("aria-label", page.ariaLabel);
+    nav.append(link);
+  });
+
+  navLinks = Array.from(nav.querySelectorAll("a"));
+  nav.style.setProperty("--page-count", navPages.length);
   nav.style.setProperty("--active-index", activeIndex);
 }
 

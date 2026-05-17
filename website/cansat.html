@@ -43,15 +43,15 @@
         <strong>Overview</strong>
         <small>Payload summary</small>
       </a>
-      <a class="section-jump__card glass-panel" href="#hardware">
+      <a class="section-jump__card glass-panel" href="#components">
         <span>02</span>
-        <strong>Hardware</strong>
-        <small>Devices used</small>
+        <strong>Components</strong>
+        <small>Payload parts</small>
       </a>
-      <a class="section-jump__card glass-panel" href="#materials">
+      <a class="section-jump__card glass-panel" href="#fabrication">
         <span>03</span>
-        <strong>Materials</strong>
-        <small>Print choices</small>
+        <strong>Fabrication</strong>
+        <small>Print workflow</small>
       </a>
       <a class="section-jump__card glass-panel" href="#workflow">
         <span>04</span>
@@ -64,7 +64,7 @@
       <section class="hero hero--compact" id="cansat-overview">
         <div class="hero__copy" data-reveal>
           <h1 class="page-title">CanSat</h1>
-          <p class="hero__lead">Altitude's satellite is built around an Arduino Uno R3 controller and a repeatable 3D-printing workflow using Bambu Lab hardware.</p>
+          <p class="hero__lead">Altitude's satellite is built around an Arduino Uno R3 controller, supporting payload components, and a repeatable 3D-printing workflow using Bambu Lab hardware.</p>
         </div>
         <aside class="hero-card glass-panel" data-reveal>
           <div class="hero-card__meta">
@@ -78,16 +78,16 @@
             </div>
             <div class="meta-row">
               <strong>Filament</strong>
-              <span>ASA Aero, TPU 90A, and PETG CF</span>
+              <span>ASA Aero, TPU 90A, PETG CF, and PLA HS</span>
             </div>
           </div>
         </aside>
       </section>
 
-      <section class="section section--tight" id="hardware">
+      <section class="section section--tight" id="components">
         <div class="section__head" data-reveal>
-          <h2>Mission Hardware</h2>
-          <p>The devices below support the two sides of the payload: embedded control and a controlled fabrication workflow.</p>
+          <h2>CanSat Components</h2>
+          <p>The payload starts with embedded control, sensing, communications, and compact mechanism parts before the structure is manufactured around them.</p>
         </div>
 
         <div class="device-grid">
@@ -97,22 +97,6 @@
             </div>
             <h3>Arduino Uno R3</h3>
             <p>The Uno R3 is the CanSat's microcontroller platform. It is used to run mission code, coordinate sensor readings, manage timing, and provide a clear, testable control layer for the payload.</p>
-          </article>
-
-          <article class="device-card glass-panel" data-reveal>
-            <div class="device-card__image">
-              <img src="../assets/images/Bambu Lab X2D.png" alt="Bambu Lab X2D 3D Printer">
-            </div>
-            <h3>Bambu Lab X2D 3D Printer</h3>
-            <p>The X2D printer is used with the AMS hardware to manufacture the CanSat structure, fixtures, test pieces, and revised CAD iterations. Fast printing helps the team test fit and strength before finalising a design.</p>
-          </article>
-
-          <article class="device-card glass-panel" data-reveal>
-            <div class="device-card__image">
-              <img src="../assets/images/Bambu Lab AMS HT.png" alt="Bambu Lab AMS HT Filament Dryer">
-            </div>
-            <h3>Automatic Material System</h3>
-            <p>The AMS 2 Pro and two AMS HT dryers are part of the fabrication process. They manage multi-material printing and keep engineering filaments dry for consistent structural parts.</p>
           </article>
 
           <article class="device-card glass-panel" data-reveal>
@@ -138,22 +122,70 @@
             <h3>FRM95W LoRa Module</h3>
             <p>The LoRa radio module is planned for long-range communication tests, supporting telemetry links between the CanSat payload and the ground workflow.</p>
           </article>
+
+          <article class="device-card glass-panel" data-reveal>
+            <div class="device-card__image">
+              <img src="../assets/images/SG90 Servo Motor.png" alt="SG90 Servo Motor">
+            </div>
+            <h3>SG90 Servo Motor</h3>
+            <p>The SG90 servo provides compact actuation for mechanism prototypes and controlled movement tests, such as release or recovery experiments.</p>
+          </article>
         </div>
       </section>
 
-      <section class="section" id="materials">
-        <div class="feature-line">
-          <article class="stat-panel glass-panel" data-reveal>
-            <strong>Filaments</strong>
-            <span>ASA Aero, TPU 90A, and PETG CF give the team options for lightweight structure, flexible parts, and carbon-fibre-reinforced prints.</span>
+      <section class="section" id="fabrication">
+        <div class="section__head" data-reveal>
+          <h2>Fabrication and Filaments</h2>
+          <p>The printer, Automatic Material System hardware, and engineering filaments are used to prototype, test, and refine the physical CanSat structure.</p>
+        </div>
+
+        <div class="device-grid">
+          <article class="device-card glass-panel" data-reveal>
+            <div class="device-card__image">
+              <img src="../assets/images/Bambu Lab X2D.png" alt="Bambu Lab X2D 3D Printer">
+            </div>
+            <h3>Bambu Lab X2D 3D Printer</h3>
+            <p>The X2D printer manufactures the CanSat structure, fixtures, test pieces, and revised CAD iterations. Fast printing helps the team test fit and strength before finalising a design.</p>
           </article>
-          <article class="stat-panel glass-panel" data-reveal>
-            <strong>CAD</strong>
-            <span>Lets the team tune clearances, board mounts, wall thickness, and parachute or recovery interfaces before printing.</span>
+
+          <article class="device-card glass-panel" data-reveal>
+            <div class="device-card__image">
+              <img src="../assets/images/Bambu Lab AMS HT.png" alt="Automatic Material System and AMS HT filament dryers">
+            </div>
+            <h3>Automatic Material System</h3>
+            <p>The AMS 2 Pro and two AMS HT dryers are part of the fabrication process. They manage multi-material printing and keep engineering filaments dry for consistent structural parts.</p>
           </article>
-          <article class="stat-panel glass-panel" data-reveal>
-            <strong>Tests</strong>
-            <span>Every printed iteration can be handled, checked, revised, and documented before the final competition build.</span>
+
+          <article class="device-card glass-panel" data-reveal>
+            <div class="device-card__image">
+              <img src="../assets/images/ASA Aero.png" alt="ASA Aero filament spool">
+            </div>
+            <h3>ASA Aero</h3>
+            <p>ASA Aero is used for lightweight structural printing where the team wants a stronger engineering material while keeping printed parts efficient.</p>
+          </article>
+
+          <article class="device-card glass-panel" data-reveal>
+            <div class="device-card__image">
+              <img src="../assets/images/TPU90A.png" alt="TPU 90A filament spool">
+            </div>
+            <h3>TPU 90A</h3>
+            <p>TPU 90A gives the team a flexible material option for shock-absorbing, compliant, or grip-like parts during mechanism and fit testing.</p>
+          </article>
+
+          <article class="device-card glass-panel" data-reveal>
+            <div class="device-card__image">
+              <img src="../assets/images/PETG CF.png" alt="PETG CF filament spool">
+            </div>
+            <h3>PETG CF</h3>
+            <p>PETG CF is used for carbon-fibre-reinforced parts where stiffness, dimensional stability, and a clean engineering finish are useful.</p>
+          </article>
+
+          <article class="device-card glass-panel" data-reveal>
+            <div class="device-card__image">
+              <img src="../assets/images/PLA HS.png" alt="PLA HS filament spool">
+            </div>
+            <h3>PLA HS</h3>
+            <p>PLA HS is a high-speed PLA used for rapid prototyping, letting the team print early CAD iterations quickly before moving to specialist materials.</p>
           </article>
         </div>
       </section>
@@ -172,7 +204,7 @@
           <article class="process-card glass-panel" data-reveal>
             <span>2</span>
             <h3>Print</h3>
-            <p>The X2D, AMS 2 Pro, and AMS HT dryers produce prototypes and final parts with controlled ASA Aero, TPU 90A, and PETG CF handling.</p>
+            <p>The X2D, AMS 2 Pro, and AMS HT dryers produce prototypes and final parts with controlled PLA HS, ASA Aero, TPU 90A, and PETG CF handling.</p>
           </article>
           <article class="process-card glass-panel" data-reveal>
             <span>3</span>

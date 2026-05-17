@@ -10,10 +10,10 @@ const currentPage = window.location.pathname.split("/").pop() || "index.html";
 const pageIndexes = new Map([
   ["index.html", 0],
   ["", 0],
-  ["about-altitude.html", 0],
   ["team.html", 1],
   ["cansat.html", 2],
-  ["about-cansat.html", 2],
+  ["about-altitude.html", 3],
+  ["about-cansat.html", 4],
 ]);
 const activeIndex = pageIndexes.get(currentPage) ?? 0;
 let selectedIndex = activeIndex;

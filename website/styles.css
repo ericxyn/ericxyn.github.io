@@ -10,6 +10,7 @@
   --line: rgba(16, 24, 32, 0.14);
   --shadow: 0 24px 70px rgba(28, 38, 45, 0.18);
   --radius: 24px;
+  --panel-gap: clamp(20px, 2.2vw, 30px);
   --max: 1500px;
   --page-gutter: clamp(24px, 4vw, 82px);
   --content-reserve: clamp(430px, 25vw, 560px);
@@ -594,13 +595,13 @@ p {
 .content-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 0.48fr);
-  gap: 18px;
+  gap: var(--panel-gap);
   align-items: stretch;
 }
 
 .content-stack {
   display: grid;
-  gap: 18px;
+  gap: var(--panel-gap);
 }
 
 .content-list {
@@ -618,7 +619,7 @@ p {
 
 .stat-grid {
   display: grid;
-  gap: 16px;
+  gap: var(--panel-gap);
 }
 
 .stat-panel strong {
@@ -637,7 +638,7 @@ p {
 .link-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  gap: var(--panel-gap);
 }
 
 .link-panel {
@@ -794,7 +795,7 @@ p {
 .device-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  gap: var(--panel-gap);
 }
 
 .device-card {
@@ -829,7 +830,7 @@ p {
 .process-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  gap: var(--panel-gap);
 }
 
 .process-card {
@@ -852,7 +853,11 @@ p {
 .feature-line {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: var(--panel-gap);
+}
+
+.section > :where(.content-grid, .link-grid, .device-grid, .process-grid, .feature-line, .copy-panel, .school-strip) + :where(.content-grid, .link-grid, .device-grid, .process-grid, .feature-line, .copy-panel, .school-strip) {
+  margin-top: var(--panel-gap);
 }
 
 .feature-line .stat-panel {

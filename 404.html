@@ -333,12 +333,12 @@
       }
 
       .aircraft__main-wing {
-        left: 92px;
+        left: 80px;
         top: 9px;
-        width: 72px;
+        width: 84px;
         height: 56px;
         background: currentColor;
-        clip-path: polygon(8% 38%, 100% 0, 68% 47%, 100% 100%, 8% 62%, 0 50%);
+        clip-path: polygon(100% 42%, 4% 0, 32% 47%, 4% 100%, 100% 60%, 86% 50%);
         opacity: 0.96;
       }
 
@@ -1005,6 +1005,7 @@
 
       function spawnAircraft() {
         if (reducedMotion || latestProgress < 0.085 || latestProgress > 0.165) return;
+        if (flyway.querySelector(".aircraft")) return;
 
         const plane = document.createElement("span");
         const fuselage = document.createElement("span");
@@ -1014,11 +1015,11 @@
         const cockpitWindow = document.createElement("span");
         const engine = document.createElement("span");
         const contrail = document.createElement("span");
-        const reverse = Math.random() > 0.5;
+        const reverse = false;
         plane.className = `aircraft${reverse ? " aircraft--reverse" : ""}`;
         plane.style.setProperty("--top", `${22 + Math.random() * 42}vh`);
         plane.style.setProperty("--duration", `${15 + Math.random() * 9}s`);
-        plane.style.setProperty("--delay", `${-1.8 - Math.random() * 1.4}s`);
+        plane.style.setProperty("--delay", `${-0.4 - Math.random() * 0.8}s`);
         fuselage.className = "aircraft__fuselage";
         mainWing.className = "aircraft__main-wing";
         tailWing.className = "aircraft__tail-wing";
@@ -1028,6 +1029,7 @@
         contrail.className = "contrail";
         plane.append(contrail, tailWing, fin, fuselage, mainWing, cockpitWindow, engine);
         flyway.append(plane);
+        plane.addEventListener("animationend", () => plane.remove(), { once: true });
         window.setTimeout(() => plane.remove(), 26000);
       }
 
@@ -1046,7 +1048,7 @@
       window.addEventListener("scroll", requestPaint, { passive: true });
       window.addEventListener("DOMContentLoaded", bootAtRandomAltitude);
 
-      aircraftTimer = window.setInterval(spawnAircraft, 9000);
+      aircraftTimer = window.setInterval(spawnAircraft, 24000);
       window.addEventListener("pagehide", () => window.clearInterval(aircraftTimer));
     </script>
   </body>

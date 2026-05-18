@@ -73,17 +73,23 @@
           linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 46%, var(--sky-bottom) 100%);
       }
 
-      .scene::before {
-        content: "";
+      .stars {
         position: absolute;
         inset: 0;
         opacity: var(--stars-opacity);
-        background-image:
-          radial-gradient(circle, rgba(255, 255, 255, 0.96) 0 1px, transparent 1.5px),
-          radial-gradient(circle, rgba(200, 231, 255, 0.82) 0 1px, transparent 1.5px),
-          radial-gradient(circle, rgba(255, 255, 255, 0.72) 0 1px, transparent 1.5px);
-        background-position: 12vw 18vh, 72vw 26vh, 42vw 64vh;
-        background-size: 150px 130px, 210px 190px, 280px 230px;
+        pointer-events: none;
+      }
+
+      .star {
+        position: absolute;
+        left: var(--x);
+        top: var(--y);
+        width: var(--size);
+        height: var(--size);
+        border-radius: 50%;
+        opacity: var(--o);
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 0 var(--glow) rgba(196, 226, 255, 0.72);
       }
 
       .scene::after {
@@ -825,6 +831,7 @@
   </head>
   <body>
     <main class="scene" aria-label="Error 404 - Page Not Found">
+      <div class="stars" aria-hidden="true"></div>
       <div class="sun-glow" aria-hidden="true"></div>
       <div class="atmosphere-line" aria-hidden="true"></div>
 
@@ -882,6 +889,7 @@
       const root = document.documentElement;
       const altitudeValue = document.querySelector("#altitude-value");
       const flyway = document.querySelector(".flyway");
+      const stars = document.querySelector(".stars");
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const atmosphereLimitKm = 100;
       let maxScroll = 1;
@@ -908,6 +916,31 @@
 
       function color(from, to, amount) {
         return `rgb(${mix(from[0], to[0], amount)}, ${mix(from[1], to[1], amount)}, ${mix(from[2], to[2], amount)})`;
+      }
+
+      function seedStars() {
+        const starCount = window.innerWidth < 720 ? 34 : 78;
+        const fragment = document.createDocumentFragment();
+        stars.replaceChildren();
+
+        for (let i = 0; i < starCount; i += 1) {
+          const star = document.createElement("span");
+          const size = 1 + Math.random() * 1.9;
+          const x = Math.random() * 100;
+          const y = Math.random() * 100;
+          const opacity = 0.42 + Math.random() * 0.58;
+          const glow = 5 + Math.random() * 11;
+
+          star.className = "star";
+          star.style.setProperty("--x", `${x.toFixed(2)}%`);
+          star.style.setProperty("--y", `${y.toFixed(2)}%`);
+          star.style.setProperty("--size", `${size.toFixed(2)}px`);
+          star.style.setProperty("--o", opacity.toFixed(2));
+          star.style.setProperty("--glow", `${glow.toFixed(1)}px`);
+          fragment.append(star);
+        }
+
+        stars.append(fragment);
       }
 
       function calculateMaxScroll() {
@@ -993,6 +1026,7 @@
       }
 
       function bootAtRandomAltitude() {
+        seedStars();
         calculateMaxScroll();
         const startProgress = 0.04 + Math.random() * 0.88;
         window.scrollTo(0, Math.round(maxScroll * (1 - startProgress)));

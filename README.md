@@ -29,6 +29,8 @@ The mission core is still being decided, so the website lists it as `[unknown]` 
 
 The site is a static HTML, CSS, and JavaScript website in the `website/` folder, with shared assets in `assets/`. Root-level HTML files redirect into the website folder so the pages work cleanly on GitHub Pages.
 
+The main engineering repository for flight code, CAD, telemetry work, build notes, and test data is [ericxyn/Altitude-HABS-CanSat-2026-2027](https://github.com/ericxyn/Altitude-HABS-CanSat-2026-2027).
+
 Pages included:
 
 - Home

@@ -201,26 +201,62 @@
         animation-delay: var(--delay);
       }
 
+      .bird span {
+        position: absolute;
+        left: 50%;
+        top: 48%;
+        width: 14%;
+        height: 12%;
+        border-radius: 999px;
+        background: currentColor;
+        transform: translate(-50%, -50%);
+      }
+
       .bird::before,
       .bird::after {
         content: "";
         position: absolute;
-        top: 28%;
-        width: 54%;
-        height: 64%;
+        top: 26%;
+        width: 52%;
+        height: 62%;
         border-top: 2px solid currentColor;
+        transform-origin: 100% 50%;
+        animation: left-wing-flap 1.18s ease-in-out infinite;
+        animation-delay: var(--flap-delay);
       }
 
       .bird::before {
         left: 0;
         border-radius: 100% 0 0 0;
-        transform: rotate(14deg);
       }
 
       .bird::after {
         right: 0;
         border-radius: 0 100% 0 0;
-        transform: rotate(-14deg);
+        transform-origin: 0 50%;
+        animation-name: right-wing-flap;
+      }
+
+      @keyframes left-wing-flap {
+        0%,
+        100% {
+          transform: rotate(20deg) translateY(0);
+        }
+
+        50% {
+          transform: rotate(-26deg) translateY(18%);
+        }
+      }
+
+      @keyframes right-wing-flap {
+        0%,
+        100% {
+          transform: rotate(-20deg) translateY(0);
+        }
+
+        50% {
+          transform: rotate(26deg) translateY(18%);
+        }
       }
 
       @keyframes bird-drift {
@@ -239,65 +275,138 @@
 
       .aircraft {
         position: fixed;
-        left: -220px;
+        left: -260px;
         top: var(--top);
         z-index: 3;
-        width: 164px;
-        height: 28px;
+        width: 220px;
+        height: 72px;
         color: rgba(250, 253, 255, 0.94);
-        filter: drop-shadow(0 12px 16px rgba(13, 40, 64, 0.2));
+        filter: drop-shadow(0 14px 18px rgba(13, 40, 64, 0.18));
         animation: fly-past var(--duration) linear forwards;
         animation-delay: var(--delay, 0s);
       }
 
       .aircraft--reverse {
         left: auto;
-        right: -220px;
+        right: -260px;
         transform: scaleX(-1);
         animation-name: fly-past-reverse;
       }
 
-      .aircraft::before {
-        content: "";
+      .aircraft__fuselage,
+      .aircraft__main-wing,
+      .aircraft__tail-wing,
+      .aircraft__fin,
+      .aircraft__window,
+      .aircraft__engine {
         position: absolute;
-        left: 34px;
-        top: 10px;
-        width: 98px;
-        height: 8px;
-        border-radius: 999px;
-        background: currentColor;
+        z-index: 2;
       }
 
-      .aircraft::after {
+      .aircraft__fuselage {
+        left: 52px;
+        top: 29px;
+        width: 126px;
+        height: 15px;
+        border-radius: 999px 72% 72% 999px;
+        background: currentColor;
+        box-shadow: inset 20px 0 18px rgba(140, 212, 250, 0.18);
+      }
+
+      .aircraft__fuselage::after {
         content: "";
         position: absolute;
-        left: 78px;
-        top: 0;
-        width: 36px;
-        height: 28px;
+        right: -16px;
+        top: 1px;
+        width: 30px;
+        height: 13px;
+        border-radius: 0 999px 999px 0;
         background: currentColor;
-        clip-path: polygon(0 43%, 100% 0, 70% 50%, 100% 100%, 0 58%);
+        clip-path: polygon(0 0, 100% 50%, 0 100%);
+      }
+
+      .aircraft__main-wing {
+        left: 92px;
+        top: 9px;
+        width: 72px;
+        height: 56px;
+        background: currentColor;
+        clip-path: polygon(8% 38%, 100% 0, 68% 47%, 100% 100%, 8% 62%, 0 50%);
+        opacity: 0.96;
+      }
+
+      .aircraft__tail-wing {
+        left: 45px;
+        top: 18px;
+        width: 38px;
+        height: 36px;
+        background: currentColor;
+        clip-path: polygon(0 24%, 100% 44%, 100% 58%, 0 82%, 30% 52%);
+        opacity: 0.92;
+      }
+
+      .aircraft__fin {
+        left: 56px;
+        top: 8px;
+        width: 32px;
+        height: 30px;
+        background: currentColor;
+        clip-path: polygon(0 100%, 82% 0, 100% 100%);
+        opacity: 0.9;
+      }
+
+      .aircraft__window {
+        left: 144px;
+        top: 31px;
+        width: 18px;
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(90, 178, 224, 0.76);
+      }
+
+      .aircraft__engine {
+        left: 106px;
+        top: 47px;
+        width: 18px;
+        height: 7px;
+        border-radius: 0 0 999px 999px;
+        background: rgba(229, 241, 248, 0.96);
+        box-shadow: 38px 0 0 rgba(229, 241, 248, 0.96);
       }
 
       .contrail {
         position: absolute;
-        right: 134px;
-        top: 11px;
-        width: min(42vw, 420px);
-        height: 9px;
-        opacity: 0.74;
+        right: 154px;
+        top: 31px;
+        z-index: 1;
+        width: min(45vw, 480px);
+        height: 7px;
+        opacity: 0.72;
         background:
-          linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.52) 16%, rgba(255, 255, 255, 0.86));
-        filter: blur(1px);
+          linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28) 18%, rgba(255, 255, 255, 0.82));
+        filter: blur(1.3px);
       }
 
       .contrail::after {
         content: "";
         position: absolute;
-        inset: 9px 12% auto 8%;
-        height: 6px;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0.72));
-        filter: blur(2px);
+        left: 7%;
+        right: 4%;
+        top: 12px;
+        height: 5px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0.72));
+        filter: blur(2.4px);
+      }
+
+      .contrail::before {
+        content: "";
+        position: absolute;
+        left: 16%;
+        right: 1%;
+        top: -11px;
+        height: 5px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.7));
+        filter: blur(2.2px);
       }
 
       @keyframes fly-past {
@@ -355,32 +464,146 @@
       .launch-site {
         position: absolute;
         left: 50%;
-        bottom: 20vh;
+        bottom: 17vh;
         z-index: 2;
-        width: min(64vw, 620px);
-        height: 30vh;
+        width: min(78vw, 780px);
+        height: 38vh;
         opacity: var(--ground-opacity);
         transform: translate3d(-50%, var(--site-drop), 0);
       }
 
-      .gantry {
+      .pad-deck {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: min(64vw, 640px);
+        height: 58px;
+        transform: translateX(-50%);
+        border-radius: 8px 8px 18px 18px;
+        background:
+          linear-gradient(90deg, transparent 0 9%, rgba(255, 255, 255, 0.3) 9% 10%, transparent 10% 22%, rgba(255, 255, 255, 0.28) 22% 23%, transparent 23%),
+          linear-gradient(180deg, #8b98a0, #56636c);
+        box-shadow:
+          inset 0 2px 0 rgba(255, 255, 255, 0.44),
+          0 18px 36px rgba(16, 24, 32, 0.24);
+      }
+
+      .pad-deck::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -23px;
+        width: 210px;
+        height: 34px;
+        transform: translateX(-50%);
+        border-radius: 0 0 24px 24px;
+        background:
+          repeating-linear-gradient(90deg, transparent 0 22px, rgba(255, 255, 255, 0.14) 22px 25px),
+          linear-gradient(180deg, #394650, #263139);
+      }
+
+      .flame-trench {
+        position: absolute;
+        left: 50%;
+        bottom: -20px;
+        width: 280px;
+        height: 52px;
+        transform: translateX(-50%) perspective(220px) rotateX(58deg);
+        transform-origin: top center;
+        border-radius: 12px;
+        background:
+          linear-gradient(90deg, rgba(255, 255, 255, 0.22), transparent 18% 82%, rgba(255, 255, 255, 0.16)),
+          linear-gradient(180deg, #27313a, #12191f);
+      }
+
+      .tower {
         position: absolute;
         left: 18%;
-        bottom: 8%;
-        width: 92px;
-        height: 100%;
+        bottom: 42px;
+        width: 118px;
+        height: 92%;
         border-left: 5px solid rgba(42, 55, 61, 0.7);
         border-right: 5px solid rgba(42, 55, 61, 0.7);
         background:
-          repeating-linear-gradient(135deg, transparent 0 22px, rgba(42, 55, 61, 0.56) 22px 26px, transparent 26px 52px);
+          repeating-linear-gradient(135deg, transparent 0 22px, rgba(42, 55, 61, 0.56) 22px 26px, transparent 26px 52px),
+          repeating-linear-gradient(45deg, transparent 0 24px, rgba(42, 55, 61, 0.42) 24px 27px, transparent 27px 54px);
+      }
+
+      .tower::before,
+      .tower::after {
+        content: "";
+        position: absolute;
+        left: -18px;
+        right: -18px;
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(42, 55, 61, 0.72);
+      }
+
+      .tower::before {
+        top: 20%;
+      }
+
+      .tower::after {
+        top: 55%;
+      }
+
+      .service-arm {
+        position: absolute;
+        left: calc(18% + 92px);
+        width: min(30vw, 220px);
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(52, 68, 76, 0.72);
+        transform-origin: left center;
+      }
+
+      .service-arm--top {
+        bottom: 64%;
+        transform: rotate(-8deg);
+      }
+
+      .service-arm--mid {
+        bottom: 43%;
+        width: min(24vw, 170px);
+        transform: rotate(10deg);
+      }
+
+      .service-arm::after {
+        content: "";
+        position: absolute;
+        right: -8px;
+        top: -10px;
+        width: 22px;
+        height: 28px;
+        border-radius: 6px;
+        background: rgba(52, 68, 76, 0.7);
+      }
+
+      .support-cable {
+        position: absolute;
+        left: 32%;
+        bottom: 58px;
+        width: 2px;
+        height: 74%;
+        background: rgba(42, 55, 61, 0.34);
+        transform: rotate(19deg);
+        transform-origin: bottom center;
+      }
+
+      .support-cable--right {
+        left: 66%;
+        height: 64%;
+        transform: rotate(-16deg);
       }
 
       .rocket {
         position: absolute;
-        left: 48%;
-        bottom: 6%;
-        width: 52px;
-        height: 178px;
+        left: 50%;
+        bottom: 38px;
+        width: 58px;
+        height: 206px;
+        transform: translateX(-50%);
         border-radius: 50% 50% 18px 18px / 24% 24% 10px 10px;
         background:
           linear-gradient(90deg, rgba(15, 24, 35, 0.16), transparent 32%, rgba(255, 255, 255, 0.42) 58%, rgba(15, 24, 35, 0.1)),
@@ -406,7 +629,20 @@
         position: absolute;
         inset: auto -16px 0 -16px;
         height: 44px;
-        background: linear-gradient(135deg, transparent 0 30%, #d9543f 31% 70%, transparent 71%);
+        background:
+          linear-gradient(135deg, transparent 0 30%, #d9543f 31% 70%, transparent 71%),
+          linear-gradient(225deg, transparent 0 30%, #d9543f 31% 70%, transparent 71%);
+      }
+
+      .umbilical {
+        position: absolute;
+        left: calc(50% - 120px);
+        bottom: 118px;
+        width: 124px;
+        height: 48px;
+        border-top: 5px solid rgba(58, 72, 80, 0.68);
+        border-right: 5px solid rgba(58, 72, 80, 0.68);
+        border-radius: 0 14px 0 0;
       }
 
       .error-panel {
@@ -521,7 +757,7 @@
           width: 92vw;
         }
 
-        .gantry {
+        .tower {
           left: 8%;
           width: 74px;
         }
@@ -530,6 +766,20 @@
           left: 50%;
           width: 44px;
           height: 150px;
+        }
+
+        .pad-deck {
+          width: 94vw;
+        }
+
+        .service-arm {
+          left: calc(8% + 58px);
+        }
+
+        .umbilical {
+          left: calc(50% - 92px);
+          width: 94px;
+          bottom: 104px;
         }
 
         .altitude-readout {
@@ -562,6 +812,11 @@
         .aircraft {
           animation: none;
         }
+
+        .bird::before,
+        .bird::after {
+          animation: none;
+        }
       }
     </style>
     <script>
@@ -587,18 +842,25 @@
       </div>
 
       <div class="layer birds" aria-hidden="true">
-        <span class="bird" style="--x: 7%; --y: 28vh; --size: 34px; --speed: 28s; --delay: -11s;"></span>
-        <span class="bird" style="--x: 18%; --y: 34vh; --size: 22px; --speed: 33s; --delay: -4s;"></span>
-        <span class="bird" style="--x: 63%; --y: 25vh; --size: 26px; --speed: 31s; --delay: -19s;"></span>
-        <span class="bird" style="--x: 72%; --y: 42vh; --size: 18px; --speed: 36s; --delay: -23s;"></span>
-        <span class="bird" style="--x: 35%; --y: 49vh; --size: 30px; --speed: 29s; --delay: -7s;"></span>
+        <span class="bird" style="--x: 7%; --y: 28vh; --size: 34px; --speed: 28s; --delay: -11s; --flap-delay: -0.2s;"><span></span></span>
+        <span class="bird" style="--x: 18%; --y: 34vh; --size: 22px; --speed: 33s; --delay: -4s; --flap-delay: -0.7s;"><span></span></span>
+        <span class="bird" style="--x: 63%; --y: 25vh; --size: 26px; --speed: 31s; --delay: -19s; --flap-delay: -0.4s;"><span></span></span>
+        <span class="bird" style="--x: 72%; --y: 42vh; --size: 18px; --speed: 36s; --delay: -23s; --flap-delay: -0.9s;"><span></span></span>
+        <span class="bird" style="--x: 35%; --y: 49vh; --size: 30px; --speed: 29s; --delay: -7s; --flap-delay: -0.1s;"><span></span></span>
       </div>
 
       <div class="flyway" aria-hidden="true"></div>
 
       <div class="launch-site" aria-hidden="true">
-        <span class="gantry"></span>
+        <span class="support-cable"></span>
+        <span class="support-cable support-cable--right"></span>
+        <span class="tower"></span>
+        <span class="service-arm service-arm--top"></span>
+        <span class="service-arm service-arm--mid"></span>
+        <span class="umbilical"></span>
         <span class="rocket"></span>
+        <span class="flame-trench"></span>
+        <span class="pad-deck"></span>
       </div>
       <div class="ground" aria-hidden="true"></div>
 
@@ -654,7 +916,7 @@
 
       function paint() {
         calculateMaxScroll();
-        latestProgress = clamp(window.scrollY / maxScroll);
+        latestProgress = clamp(1 - (window.scrollY / maxScroll));
 
         const lowerFade = ease(1 - range(0.035, 0.11, latestProgress));
         const birdFade = ease(1 - range(0.05, 0.11, latestProgress));
@@ -706,14 +968,26 @@
         if (reducedMotion || latestProgress < 0.085 || latestProgress > 0.165) return;
 
         const plane = document.createElement("span");
+        const fuselage = document.createElement("span");
+        const mainWing = document.createElement("span");
+        const tailWing = document.createElement("span");
+        const fin = document.createElement("span");
+        const cockpitWindow = document.createElement("span");
+        const engine = document.createElement("span");
         const contrail = document.createElement("span");
         const reverse = Math.random() > 0.5;
         plane.className = `aircraft${reverse ? " aircraft--reverse" : ""}`;
         plane.style.setProperty("--top", `${22 + Math.random() * 42}vh`);
         plane.style.setProperty("--duration", `${15 + Math.random() * 9}s`);
         plane.style.setProperty("--delay", `${-1.8 - Math.random() * 1.4}s`);
+        fuselage.className = "aircraft__fuselage";
+        mainWing.className = "aircraft__main-wing";
+        tailWing.className = "aircraft__tail-wing";
+        fin.className = "aircraft__fin";
+        cockpitWindow.className = "aircraft__window";
+        engine.className = "aircraft__engine";
         contrail.className = "contrail";
-        plane.append(contrail);
+        plane.append(contrail, tailWing, fin, fuselage, mainWing, cockpitWindow, engine);
         flyway.append(plane);
         window.setTimeout(() => plane.remove(), 26000);
       }
@@ -721,7 +995,7 @@
       function bootAtRandomAltitude() {
         calculateMaxScroll();
         const startProgress = 0.04 + Math.random() * 0.88;
-        window.scrollTo(0, Math.round(maxScroll * startProgress));
+        window.scrollTo(0, Math.round(maxScroll * (1 - startProgress)));
         paint();
         window.requestAnimationFrame(() => {
           root.classList.remove("is-booting");

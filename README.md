@@ -15,13 +15,14 @@ Altitude is a student-led CanSat team from Haberdashers' Boys' School in Hertfor
 
 The Altitude CanSat is designed around an Arduino Uno R3 microcontroller, giving the payload a clear and testable control layer for mission code, timing, sensor readings, and data handling.
 
-The fabrication workflow uses the Bambu Lab X2D printer with Automatic Material System hardware. The printer is used to manufacture the CanSat structure, internal fixtures, test pieces, and CAD iteration parts. The AMS 2 Pro and two AMS HT filament dryers support the fabrication process by managing engineering filaments and keeping materials dry for consistent prints.
+The fabrication workflow uses the Bambu Lab X2D printer with Automatic Material System hardware. The printer is used to manufacture the CanSat structure, internal fixtures, test pieces, and CAD iteration parts. The AMS 2 Pro and two AMS HT filament dryers support the fabrication process by managing engineering filaments and keeping materials dry for consistent print quality.
 
 Current materials include:
 
 - ASA Aero filament
 - TPU 90A
 - PETG CF
+- PLA HS
 
 The mission core is still being decided, so the website lists it as `[unknown]` for now.
 

@@ -651,16 +651,17 @@
       }
 
       .error-panel__inner {
-        max-width: min(940px, 92vw);
+        max-width: calc(100vw - clamp(40px, 8vw, 132px));
       }
 
       h1 {
         margin: 0;
         color: rgba(255, 255, 255, 0.96);
-        font-size: clamp(3.2rem, 9vw, 8.6rem);
-        line-height: 0.93;
+        font-size: clamp(1.35rem, 5.45vw, 5.9rem);
+        line-height: 1;
         font-weight: 900;
         letter-spacing: 0;
+        white-space: nowrap;
         text-shadow:
           0 0 10px rgba(255, 255, 255, 0.76),
           0 0 34px rgba(140, 212, 250, 0.44),

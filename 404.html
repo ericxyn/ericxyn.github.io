@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html class="is-booting" lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,12 +16,29 @@
       }
 
       :root {
-        --sky: #8cd4fa;
-        --silver: #c9d2d7;
-        --silver-deep: #aebbc2;
-        --white: #ffffff;
+        --sky-top: #74c6f6;
+        --sky-mid: #c7ecff;
+        --sky-bottom: #f4fbff;
         --ink: #101820;
-        --scroll-y: 0px;
+        --glass: rgba(255, 255, 255, 0.5);
+        --glass-line: rgba(255, 255, 255, 0.64);
+        --progress: 0;
+        --altitude: 0;
+        --ground-opacity: 1;
+        --bird-opacity: 1;
+        --flight-opacity: 0;
+        --cloud-opacity: 1;
+        --high-cloud-opacity: 0;
+        --stars-opacity: 0;
+        --upper-shade: 0;
+        --ground-glow: 0.34;
+        --sun-opacity: 0.28;
+        --ground-drop: 0vh;
+        --site-drop: 0vh;
+        --bird-rise: 0vh;
+        --cloud-shift: 0vh;
+        --high-cloud-shift: 0vh;
+        --hint-color: rgba(16, 24, 32, 0.62);
       }
 
       * {
@@ -30,53 +47,106 @@
 
       html {
         min-height: 100%;
-        background: var(--sky);
+        background: var(--sky-bottom);
         scroll-behavior: auto;
       }
 
       body {
         margin: 0;
-        min-height: 460vh;
+        min-height: 680vh;
         color: var(--ink);
-        background: var(--sky);
+        background: var(--sky-bottom);
         font-family: "Montserrat", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
         overflow-x: hidden;
       }
 
-      .sky {
+      .is-booting body {
+        visibility: hidden;
+      }
+
+      .scene {
         position: fixed;
         inset: 0;
         overflow: hidden;
         background:
-          radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.36), transparent 25vw),
-          linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 46%),
-          var(--sky);
+          radial-gradient(circle at 20% 16%, rgba(255, 255, 255, 0.5), transparent 26vw),
+          linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 46%, var(--sky-bottom) 100%);
       }
 
-      .cloud-field {
+      .scene::before {
+        content: "";
         position: absolute;
-        inset: -64vh -14vw;
-        min-height: 270vh;
-        transform: translate3d(0, calc(var(--scroll-y) * -0.18), 0);
-        will-change: transform;
+        inset: 0;
+        opacity: var(--stars-opacity);
+        background-image:
+          radial-gradient(circle, rgba(255, 255, 255, 0.96) 0 1px, transparent 1.5px),
+          radial-gradient(circle, rgba(200, 231, 255, 0.82) 0 1px, transparent 1.5px),
+          radial-gradient(circle, rgba(255, 255, 255, 0.72) 0 1px, transparent 1.5px);
+        background-position: 12vw 18vh, 72vw 26vh, 42vw 64vh;
+        background-size: 150px 130px, 210px 190px, 280px 230px;
       }
 
-      .cloud-field--far {
-        opacity: 0.64;
-        transform: translate3d(0, calc(var(--scroll-y) * -0.1), 0) scale(1.08);
+      .scene::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(180deg, rgba(3, 6, 18, var(--upper-shade)), transparent 38%),
+          radial-gradient(circle at 50% 106%, rgba(255, 255, 255, var(--ground-glow)), transparent 36vw);
+      }
+
+      .atmosphere-line {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: clamp(72px, 15vh, 150px);
+        height: 1px;
+        opacity: var(--stars-opacity);
+        background: linear-gradient(90deg, transparent, rgba(140, 212, 250, 0.92), rgba(255, 255, 255, 0.84), transparent);
+        box-shadow:
+          0 0 28px rgba(140, 212, 250, 0.85),
+          0 10px 72px rgba(255, 255, 255, 0.48);
+      }
+
+      .sun-glow {
+        position: absolute;
+        width: 44vmin;
+        height: 44vmin;
+        right: min(14vw, 170px);
+        top: min(14vh, 112px);
+        border-radius: 50%;
+        opacity: var(--sun-opacity);
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.28) 28%, transparent 66%);
+        filter: blur(4px);
+      }
+
+      .layer {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .lower-clouds {
+        opacity: var(--cloud-opacity);
+      }
+
+      .high-clouds {
+        opacity: var(--high-cloud-opacity);
       }
 
       .cloud {
         position: absolute;
         left: var(--x);
-        top: calc(var(--y) + var(--loop-offset, 0px));
+        top: var(--y);
         width: var(--w);
-        height: calc(var(--w) * 0.26);
+        max-width: 92vw;
+        aspect-ratio: 3.85 / 1;
         border-radius: 999px;
-        background: linear-gradient(180deg, var(--white) 0%, #eef3f6 58%, var(--silver) 100%);
-        box-shadow: 0 28px 34px rgba(86, 112, 126, 0.15);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(232, 241, 248, 0.92) 68%, rgba(184, 199, 208, 0.75));
+        box-shadow: 0 28px 54px rgba(46, 81, 105, 0.16);
         opacity: var(--o);
-        transform: scale(var(--s));
+        transform: translate3d(0, var(--cloud-shift), 0) scale(var(--s));
       }
 
       .cloud::before,
@@ -92,7 +162,6 @@
         height: 110%;
         left: 18%;
         top: -46%;
-        background: linear-gradient(180deg, var(--white), #eef3f6 72%, var(--silver));
       }
 
       .cloud::after {
@@ -100,25 +169,250 @@
         height: 92%;
         right: 12%;
         top: -28%;
-        background: linear-gradient(180deg, var(--white), #eef3f6 68%, var(--silver-deep));
       }
 
-      .cloud-band {
-        --loop-offset: 0px;
+      .cloud--high {
+        aspect-ratio: 8 / 1;
+        opacity: var(--o);
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.68), transparent);
+        box-shadow: none;
+        filter: blur(1px);
+        transform: translate3d(0, var(--high-cloud-shift), 0) scale(var(--s));
       }
 
-      .cloud-band--next {
-        --loop-offset: 125vh;
+      .cloud--high::before,
+      .cloud--high::after {
+        display: none;
       }
 
-      .cloud-band--last {
-        --loop-offset: 250vh;
+      .birds {
+        opacity: var(--bird-opacity);
+        transform: translate3d(0, var(--bird-rise), 0);
+      }
+
+      .bird {
+        position: absolute;
+        left: var(--x);
+        top: var(--y);
+        width: var(--size);
+        aspect-ratio: 2.2 / 1;
+        color: rgba(16, 24, 32, 0.64);
+        animation: bird-drift var(--speed) linear infinite;
+        animation-delay: var(--delay);
+      }
+
+      .bird::before,
+      .bird::after {
+        content: "";
+        position: absolute;
+        top: 28%;
+        width: 54%;
+        height: 64%;
+        border-top: 2px solid currentColor;
+      }
+
+      .bird::before {
+        left: 0;
+        border-radius: 100% 0 0 0;
+        transform: rotate(14deg);
+      }
+
+      .bird::after {
+        right: 0;
+        border-radius: 0 100% 0 0;
+        transform: rotate(-14deg);
+      }
+
+      @keyframes bird-drift {
+        from {
+          translate: -14vw 0;
+        }
+
+        to {
+          translate: 116vw -8vh;
+        }
+      }
+
+      .flyway {
+        opacity: var(--flight-opacity);
+      }
+
+      .aircraft {
+        position: fixed;
+        left: -220px;
+        top: var(--top);
+        z-index: 3;
+        width: 164px;
+        height: 28px;
+        color: rgba(250, 253, 255, 0.94);
+        filter: drop-shadow(0 12px 16px rgba(13, 40, 64, 0.2));
+        animation: fly-past var(--duration) linear forwards;
+        animation-delay: var(--delay, 0s);
+      }
+
+      .aircraft--reverse {
+        left: auto;
+        right: -220px;
+        transform: scaleX(-1);
+        animation-name: fly-past-reverse;
+      }
+
+      .aircraft::before {
+        content: "";
+        position: absolute;
+        left: 34px;
+        top: 10px;
+        width: 98px;
+        height: 8px;
+        border-radius: 999px;
+        background: currentColor;
+      }
+
+      .aircraft::after {
+        content: "";
+        position: absolute;
+        left: 78px;
+        top: 0;
+        width: 36px;
+        height: 28px;
+        background: currentColor;
+        clip-path: polygon(0 43%, 100% 0, 70% 50%, 100% 100%, 0 58%);
+      }
+
+      .contrail {
+        position: absolute;
+        right: 134px;
+        top: 11px;
+        width: min(42vw, 420px);
+        height: 9px;
+        opacity: 0.74;
+        background:
+          linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.52) 16%, rgba(255, 255, 255, 0.86));
+        filter: blur(1px);
+      }
+
+      .contrail::after {
+        content: "";
+        position: absolute;
+        inset: 9px 12% auto 8%;
+        height: 6px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0.72));
+        filter: blur(2px);
+      }
+
+      @keyframes fly-past {
+        from {
+          translate: -12vw 0;
+        }
+
+        to {
+          translate: calc(100vw + 420px) -5vh;
+        }
+      }
+
+      @keyframes fly-past-reverse {
+        from {
+          translate: 12vw 0;
+        }
+
+        to {
+          translate: calc(-100vw - 420px) -5vh;
+        }
+      }
+
+      .ground {
+        position: absolute;
+        left: -6vw;
+        right: -6vw;
+        bottom: -15vh;
+        height: 42vh;
+        opacity: var(--ground-opacity);
+        transform: translate3d(0, var(--ground-drop), 0);
+        background:
+          radial-gradient(ellipse at 52% 0%, rgba(255, 255, 255, 0.32), transparent 34%),
+          linear-gradient(180deg, #8fbd71, #5d8d59 45%, #3f6344);
+        border-radius: 50% 50% 0 0 / 24% 24% 0 0;
+        box-shadow: 0 -22px 72px rgba(56, 96, 74, 0.28);
+      }
+
+      .ground::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: min(44vw, 480px);
+        height: 25vh;
+        transform: translateX(-50%) perspective(240px) rotateX(58deg);
+        transform-origin: bottom center;
+        border-radius: 18px 18px 0 0;
+        background:
+          linear-gradient(90deg, transparent 47%, rgba(255, 255, 255, 0.72) 47% 53%, transparent 53%),
+          repeating-linear-gradient(180deg, transparent 0 22px, rgba(255, 255, 255, 0.46) 22px 30px, transparent 30px 70px),
+          #596170;
+        box-shadow: 0 16px 60px rgba(16, 24, 32, 0.22);
+      }
+
+      .launch-site {
+        position: absolute;
+        left: 50%;
+        bottom: 20vh;
+        z-index: 2;
+        width: min(64vw, 620px);
+        height: 30vh;
+        opacity: var(--ground-opacity);
+        transform: translate3d(-50%, var(--site-drop), 0);
+      }
+
+      .gantry {
+        position: absolute;
+        left: 18%;
+        bottom: 8%;
+        width: 92px;
+        height: 100%;
+        border-left: 5px solid rgba(42, 55, 61, 0.7);
+        border-right: 5px solid rgba(42, 55, 61, 0.7);
+        background:
+          repeating-linear-gradient(135deg, transparent 0 22px, rgba(42, 55, 61, 0.56) 22px 26px, transparent 26px 52px);
+      }
+
+      .rocket {
+        position: absolute;
+        left: 48%;
+        bottom: 6%;
+        width: 52px;
+        height: 178px;
+        border-radius: 50% 50% 18px 18px / 24% 24% 10px 10px;
+        background:
+          linear-gradient(90deg, rgba(15, 24, 35, 0.16), transparent 32%, rgba(255, 255, 255, 0.42) 58%, rgba(15, 24, 35, 0.1)),
+          linear-gradient(180deg, #f9fcff, #ced8df);
+        box-shadow: 0 20px 30px rgba(16, 24, 32, 0.18);
+      }
+
+      .rocket::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 44px;
+        width: 22px;
+        height: 22px;
+        transform: translateX(-50%);
+        border-radius: 50%;
+        background: #8cd4fa;
+        border: 4px solid rgba(16, 24, 32, 0.18);
+      }
+
+      .rocket::after {
+        content: "";
+        position: absolute;
+        inset: auto -16px 0 -16px;
+        height: 44px;
+        background: linear-gradient(135deg, transparent 0 30%, #d9543f 31% 70%, transparent 71%);
       }
 
       .error-panel {
         position: fixed;
         inset: 0;
-        z-index: 5;
+        z-index: 6;
         display: grid;
         place-items: center;
         padding: 28px;
@@ -127,20 +421,54 @@
       }
 
       .error-panel__inner {
-        max-width: min(860px, 92vw);
+        max-width: min(940px, 92vw);
       }
 
       h1 {
         margin: 0;
         color: rgba(255, 255, 255, 0.96);
-        font-size: clamp(3.4rem, 9vw, 8.8rem);
-        line-height: 0.92;
+        font-size: clamp(3.2rem, 9vw, 8.6rem);
+        line-height: 0.93;
         font-weight: 900;
         letter-spacing: 0;
         text-shadow:
-          0 0 10px rgba(255, 255, 255, 0.86),
-          0 0 32px rgba(255, 255, 255, 0.58),
-          0 18px 48px rgba(28, 67, 90, 0.26);
+          0 0 10px rgba(255, 255, 255, 0.76),
+          0 0 34px rgba(140, 212, 250, 0.44),
+          0 20px 52px rgba(12, 34, 54, 0.28);
+      }
+
+      .altitude-readout {
+        position: fixed;
+        left: 24px;
+        bottom: 24px;
+        z-index: 8;
+        min-width: 174px;
+        padding: 14px 16px;
+        border: 1px solid var(--glass-line);
+        border-radius: 8px;
+        color: rgba(16, 24, 32, 0.78);
+        background: var(--glass);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.62),
+          0 16px 38px rgba(13, 40, 64, 0.15);
+        backdrop-filter: blur(12px);
+      }
+
+      .altitude-readout span {
+        display: block;
+        font-size: 0.68rem;
+        font-weight: 850;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .altitude-readout strong {
+        display: block;
+        margin-top: 4px;
+        font-size: 1.45rem;
+        line-height: 1;
+        font-weight: 900;
+        letter-spacing: 0;
       }
 
       .home-link {
@@ -151,111 +479,128 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 46px;
+        min-height: 48px;
         padding: 0 20px;
-        border: 1px solid rgba(255, 255, 255, 0.58);
-        border-radius: 999px;
-        color: var(--ink);
-        background: rgba(255, 255, 255, 0.42);
+        border: 1px solid var(--glass-line);
+        border-radius: 8px;
+        color: rgba(16, 24, 32, 0.86);
+        background: var(--glass);
         box-shadow:
-          inset 0 1px 0 rgba(255, 255, 255, 0.72),
-          0 16px 36px rgba(28, 67, 90, 0.16);
+          inset 0 1px 0 rgba(255, 255, 255, 0.62),
+          0 16px 38px rgba(13, 40, 64, 0.15);
         font-size: 0.9rem;
-        font-weight: 800;
+        font-weight: 850;
         text-decoration: none;
         backdrop-filter: blur(12px);
+        pointer-events: auto;
       }
 
       .scroll-hint {
         position: fixed;
-        left: 24px;
-        bottom: 28px;
+        left: 50%;
+        bottom: 30px;
         z-index: 8;
-        color: rgba(16, 24, 32, 0.58);
-        font-size: 0.78rem;
-        font-weight: 800;
-        letter-spacing: 0.08em;
+        transform: translateX(-50%);
+        color: var(--hint-color);
+        font-size: 0.74rem;
+        font-weight: 850;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
       }
 
       @media (max-width: 720px) {
         body {
-          min-height: 420vh;
-        }
-
-        .cloud-field {
-          inset-inline: -72vw;
+          min-height: 620vh;
         }
 
         .cloud {
-          width: calc(var(--w) * 0.86);
+          max-width: 84vw;
+        }
+
+        .launch-site {
+          width: 92vw;
+        }
+
+        .gantry {
+          left: 8%;
+          width: 74px;
+        }
+
+        .rocket {
+          left: 50%;
+          width: 44px;
+          height: 150px;
+        }
+
+        .altitude-readout {
+          left: 14px;
+          bottom: 14px;
+          min-width: 136px;
+          padding: 12px 13px;
+        }
+
+        .altitude-readout strong {
+          font-size: 1.12rem;
         }
 
         .home-link {
           right: 14px;
           bottom: 14px;
+          min-height: 44px;
+          padding: 0 14px;
         }
 
         .scroll-hint {
-          left: 14px;
-          bottom: 18px;
-          max-width: 150px;
+          bottom: 74px;
+          width: min(280px, 72vw);
+          text-align: center;
         }
       }
 
       @media (prefers-reduced-motion: reduce) {
-        .cloud-field {
-          transform: none;
+        .bird,
+        .aircraft {
+          animation: none;
         }
       }
     </style>
+    <script>
+      document.documentElement.classList.add("is-booting");
+    </script>
   </head>
   <body>
-    <main class="sky" aria-label="Error 404 - Page Not Found">
-      <div class="cloud-field cloud-field--far" aria-hidden="true">
-        <div class="cloud-band">
-          <span class="cloud" style="--x: 5%; --y: 9vh; --w: 240px; --s: 1.1; --o: 0.58;"></span>
-          <span class="cloud" style="--x: 44%; --y: 18vh; --w: 340px; --s: 0.82; --o: 0.5;"></span>
-          <span class="cloud" style="--x: 72%; --y: 45vh; --w: 300px; --s: 1; --o: 0.62;"></span>
-          <span class="cloud" style="--x: 18%; --y: 84vh; --w: 380px; --s: 0.92; --o: 0.54;"></span>
-          <span class="cloud" style="--x: 62%; --y: 112vh; --w: 250px; --s: 1.12; --o: 0.46;"></span>
-        </div>
-        <div class="cloud-band cloud-band--next">
-          <span class="cloud" style="--x: 5%; --y: 9vh; --w: 240px; --s: 1.1; --o: 0.58;"></span>
-          <span class="cloud" style="--x: 44%; --y: 18vh; --w: 340px; --s: 0.82; --o: 0.5;"></span>
-          <span class="cloud" style="--x: 72%; --y: 45vh; --w: 300px; --s: 1; --o: 0.62;"></span>
-          <span class="cloud" style="--x: 18%; --y: 84vh; --w: 380px; --s: 0.92; --o: 0.54;"></span>
-          <span class="cloud" style="--x: 62%; --y: 112vh; --w: 250px; --s: 1.12; --o: 0.46;"></span>
-        </div>
-        <div class="cloud-band cloud-band--last">
-          <span class="cloud" style="--x: 5%; --y: 9vh; --w: 240px; --s: 1.1; --o: 0.58;"></span>
-          <span class="cloud" style="--x: 44%; --y: 18vh; --w: 340px; --s: 0.82; --o: 0.5;"></span>
-          <span class="cloud" style="--x: 72%; --y: 45vh; --w: 300px; --s: 1; --o: 0.62;"></span>
-          <span class="cloud" style="--x: 18%; --y: 84vh; --w: 380px; --s: 0.92; --o: 0.54;"></span>
-          <span class="cloud" style="--x: 62%; --y: 112vh; --w: 250px; --s: 1.12; --o: 0.46;"></span>
-        </div>
+    <main class="scene" aria-label="Error 404 - Page Not Found">
+      <div class="sun-glow" aria-hidden="true"></div>
+      <div class="atmosphere-line" aria-hidden="true"></div>
+
+      <div class="layer lower-clouds" aria-hidden="true">
+        <span class="cloud" style="--x: -4%; --y: 20vh; --w: 430px; --s: 1.08; --o: 0.88; --drift: -42vh;"></span>
+        <span class="cloud" style="--x: 62%; --y: 18vh; --w: 360px; --s: 0.86; --o: 0.66; --drift: -58vh;"></span>
+        <span class="cloud" style="--x: 12%; --y: 58vh; --w: 520px; --s: 0.94; --o: 0.86; --drift: -64vh;"></span>
+        <span class="cloud" style="--x: 72%; --y: 70vh; --w: 460px; --s: 1.02; --o: 0.72; --drift: -78vh;"></span>
       </div>
 
-      <div class="cloud-field cloud-field--near" aria-hidden="true">
-        <div class="cloud-band">
-          <span class="cloud" style="--x: -2%; --y: 24vh; --w: 430px; --s: 1.1; --o: 0.9;"></span>
-          <span class="cloud" style="--x: 68%; --y: 66vh; --w: 460px; --s: 1; --o: 0.88;"></span>
-          <span class="cloud" style="--x: 16%; --y: 128vh; --w: 520px; --s: 0.94; --o: 0.92;"></span>
-          <span class="cloud" style="--x: 54%; --y: 178vh; --w: 390px; --s: 1.18; --o: 0.86;"></span>
-        </div>
-        <div class="cloud-band cloud-band--next">
-          <span class="cloud" style="--x: -2%; --y: 24vh; --w: 430px; --s: 1.1; --o: 0.9;"></span>
-          <span class="cloud" style="--x: 68%; --y: 66vh; --w: 460px; --s: 1; --o: 0.88;"></span>
-          <span class="cloud" style="--x: 16%; --y: 128vh; --w: 520px; --s: 0.94; --o: 0.92;"></span>
-          <span class="cloud" style="--x: 54%; --y: 178vh; --w: 390px; --s: 1.18; --o: 0.86;"></span>
-        </div>
-        <div class="cloud-band cloud-band--last">
-          <span class="cloud" style="--x: -2%; --y: 24vh; --w: 430px; --s: 1.1; --o: 0.9;"></span>
-          <span class="cloud" style="--x: 68%; --y: 66vh; --w: 460px; --s: 1; --o: 0.88;"></span>
-          <span class="cloud" style="--x: 16%; --y: 128vh; --w: 520px; --s: 0.94; --o: 0.92;"></span>
-          <span class="cloud" style="--x: 54%; --y: 178vh; --w: 390px; --s: 1.18; --o: 0.86;"></span>
-        </div>
+      <div class="layer high-clouds" aria-hidden="true">
+        <span class="cloud cloud--high" style="--x: 8%; --y: 26vh; --w: 46vw; --s: 1; --o: 0.66; --drift: -10vh;"></span>
+        <span class="cloud cloud--high" style="--x: 48%; --y: 56vh; --w: 38vw; --s: 0.82; --o: 0.58; --drift: -16vh;"></span>
+        <span class="cloud cloud--high" style="--x: -10%; --y: 74vh; --w: 54vw; --s: 0.9; --o: 0.42; --drift: -20vh;"></span>
       </div>
+
+      <div class="layer birds" aria-hidden="true">
+        <span class="bird" style="--x: 7%; --y: 28vh; --size: 34px; --speed: 28s; --delay: -11s;"></span>
+        <span class="bird" style="--x: 18%; --y: 34vh; --size: 22px; --speed: 33s; --delay: -4s;"></span>
+        <span class="bird" style="--x: 63%; --y: 25vh; --size: 26px; --speed: 31s; --delay: -19s;"></span>
+        <span class="bird" style="--x: 72%; --y: 42vh; --size: 18px; --speed: 36s; --delay: -23s;"></span>
+        <span class="bird" style="--x: 35%; --y: 49vh; --size: 30px; --speed: 29s; --delay: -7s;"></span>
+      </div>
+
+      <div class="flyway" aria-hidden="true"></div>
+
+      <div class="launch-site" aria-hidden="true">
+        <span class="gantry"></span>
+        <span class="rocket"></span>
+      </div>
+      <div class="ground" aria-hidden="true"></div>
 
       <section class="error-panel">
         <div class="error-panel__inner">
@@ -263,49 +608,132 @@
         </div>
       </section>
 
-      <span class="scroll-hint">Scroll through the clouds</span>
+      <aside class="altitude-readout" aria-live="polite">
+        <span>Altitude</span>
+        <strong id="altitude-value">0 km</strong>
+      </aside>
+      <span class="scroll-hint">Scroll altitude up or down</span>
       <a class="home-link" href="/website/index.html">Return home</a>
     </main>
 
     <script>
       const root = document.documentElement;
+      const altitudeValue = document.querySelector("#altitude-value");
+      const flyway = document.querySelector(".flyway");
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      let loopStart = 0;
-      let loopEnd = 0;
+      const atmosphereLimitKm = 100;
+      let maxScroll = 1;
+      let latestProgress = 0;
       let ticking = false;
+      let aircraftTimer = 0;
+      let wasInFlightBand = false;
 
-      function setLoopBounds() {
-        loopStart = Math.round(window.innerHeight * 1.25);
-        loopEnd = Math.round(window.innerHeight * 3.75);
+      function clamp(value, min = 0, max = 1) {
+        return Math.min(max, Math.max(min, value));
+      }
+
+      function range(start, end, value) {
+        return clamp((value - start) / (end - start));
+      }
+
+      function ease(value) {
+        return value * value * (3 - 2 * value);
+      }
+
+      function mix(a, b, amount) {
+        return Math.round(a + (b - a) * amount);
+      }
+
+      function color(from, to, amount) {
+        return `rgb(${mix(from[0], to[0], amount)}, ${mix(from[1], to[1], amount)}, ${mix(from[2], to[2], amount)})`;
+      }
+
+      function calculateMaxScroll() {
+        maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       }
 
       function paint() {
-        root.style.setProperty("--scroll-y", `${window.scrollY}px`);
+        calculateMaxScroll();
+        latestProgress = clamp(window.scrollY / maxScroll);
+
+        const lowerFade = ease(1 - range(0.035, 0.11, latestProgress));
+        const birdFade = ease(1 - range(0.05, 0.11, latestProgress));
+        const cloudFade = ease(1 - range(0.52, 0.72, latestProgress));
+        const highCloudFade = ease(range(0.28, 0.52, latestProgress)) * ease(1 - range(0.72, 0.88, latestProgress));
+        const flightFade = ease(range(0.085, 0.105, latestProgress)) * ease(1 - range(0.145, 0.165, latestProgress));
+        const starsFade = ease(range(0.7, 0.9, latestProgress));
+        const darkness = ease(range(0.16, 1, latestProgress));
+        const altitudeKm = Math.round(latestProgress * atmosphereLimitKm);
+        const inFlightBand = latestProgress >= 0.085 && latestProgress <= 0.165;
+
+        root.style.setProperty("--progress", latestProgress.toFixed(4));
+        root.style.setProperty("--altitude", altitudeKm);
+        root.style.setProperty("--ground-opacity", lowerFade.toFixed(3));
+        root.style.setProperty("--bird-opacity", birdFade.toFixed(3));
+        root.style.setProperty("--cloud-opacity", cloudFade.toFixed(3));
+        root.style.setProperty("--high-cloud-opacity", highCloudFade.toFixed(3));
+        root.style.setProperty("--flight-opacity", flightFade.toFixed(3));
+        root.style.setProperty("--stars-opacity", starsFade.toFixed(3));
+        root.style.setProperty("--upper-shade", (latestProgress * 0.34).toFixed(3));
+        root.style.setProperty("--ground-glow", ((1 - latestProgress) * 0.34).toFixed(3));
+        root.style.setProperty("--sun-opacity", Math.max(0.08, 0.28 - latestProgress * 0.14).toFixed(3));
+        root.style.setProperty("--ground-drop", `${(latestProgress * 72).toFixed(2)}vh`);
+        root.style.setProperty("--site-drop", `${(latestProgress * 88).toFixed(2)}vh`);
+        root.style.setProperty("--bird-rise", `${(latestProgress * -26).toFixed(2)}vh`);
+        root.style.setProperty("--cloud-shift", `${(latestProgress * -62).toFixed(2)}vh`);
+        root.style.setProperty("--high-cloud-shift", `${(latestProgress * -15).toFixed(2)}vh`);
+        root.style.setProperty("--sky-top", color([116, 198, 246], [4, 8, 24], darkness));
+        root.style.setProperty("--sky-mid", color([199, 236, 255], [13, 24, 56], darkness));
+        root.style.setProperty("--sky-bottom", color([244, 251, 255], [38, 75, 119], darkness));
+        root.style.setProperty("--hint-color", darkness > 0.55 ? "rgba(232, 244, 255, 0.78)" : "rgba(16, 24, 32, 0.62)");
+
+        altitudeValue.textContent = `${altitudeKm} km`;
+        if (inFlightBand && !wasInFlightBand) {
+          window.requestAnimationFrame(spawnAircraft);
+        }
+        wasInFlightBand = inFlightBand;
         ticking = false;
       }
 
-      function syncScroll() {
+      function requestPaint() {
         if (!ticking) {
           window.requestAnimationFrame(paint);
           ticking = true;
         }
-
-        if (reducedMotion) return;
-
-        if (window.scrollY < loopStart * 0.35) {
-          window.scrollTo(0, window.scrollY + (loopEnd - loopStart));
-        } else if (window.scrollY > loopEnd) {
-          window.scrollTo(0, window.scrollY - (loopEnd - loopStart));
-        }
       }
 
-      window.addEventListener("resize", setLoopBounds);
-      window.addEventListener("scroll", syncScroll, { passive: true });
-      window.addEventListener("load", () => {
-        setLoopBounds();
-        if (!reducedMotion) window.scrollTo(0, loopStart);
+      function spawnAircraft() {
+        if (reducedMotion || latestProgress < 0.085 || latestProgress > 0.165) return;
+
+        const plane = document.createElement("span");
+        const contrail = document.createElement("span");
+        const reverse = Math.random() > 0.5;
+        plane.className = `aircraft${reverse ? " aircraft--reverse" : ""}`;
+        plane.style.setProperty("--top", `${22 + Math.random() * 42}vh`);
+        plane.style.setProperty("--duration", `${15 + Math.random() * 9}s`);
+        plane.style.setProperty("--delay", `${-1.8 - Math.random() * 1.4}s`);
+        contrail.className = "contrail";
+        plane.append(contrail);
+        flyway.append(plane);
+        window.setTimeout(() => plane.remove(), 26000);
+      }
+
+      function bootAtRandomAltitude() {
+        calculateMaxScroll();
+        const startProgress = 0.04 + Math.random() * 0.88;
+        window.scrollTo(0, Math.round(maxScroll * startProgress));
         paint();
-      });
+        window.requestAnimationFrame(() => {
+          root.classList.remove("is-booting");
+        });
+      }
+
+      window.addEventListener("resize", requestPaint);
+      window.addEventListener("scroll", requestPaint, { passive: true });
+      window.addEventListener("DOMContentLoaded", bootAtRandomAltitude);
+
+      aircraftTimer = window.setInterval(spawnAircraft, 9000);
+      window.addEventListener("pagehide", () => window.clearInterval(aircraftTimer));
     </script>
   </body>
 </html>

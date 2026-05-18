@@ -38,6 +38,7 @@
         --bird-rise: 0vh;
         --cloud-shift: 0vh;
         --high-cloud-shift: 0vh;
+        --flight-shift: 0vh;
         --hint-color: rgba(16, 24, 32, 0.62);
       }
 
@@ -282,7 +283,7 @@
       .aircraft {
         position: fixed;
         left: -260px;
-        top: var(--top);
+        top: calc(var(--top) + var(--flight-shift));
         z-index: 3;
         width: 220px;
         height: 72px;
@@ -960,6 +961,10 @@
         const darkness = ease(range(0.16, 1, latestProgress));
         const altitudeKm = Math.round(latestProgress * atmosphereLimitKm);
         const inFlightBand = latestProgress >= 0.085 && latestProgress <= 0.165;
+        const lowerCloudOffset = range(0.52, 0.72, latestProgress) * 70;
+        const highCloudOffset = ((1 - range(0.28, 0.52, latestProgress)) * -56) + (range(0.72, 0.88, latestProgress) * 56);
+        const birdOffset = range(0.05, 0.11, latestProgress) * 48;
+        const flightOffset = ((1 - range(0.085, 0.105, latestProgress)) * -34) + (range(0.145, 0.165, latestProgress) * 34);
 
         root.style.setProperty("--progress", latestProgress.toFixed(4));
         root.style.setProperty("--altitude", altitudeKm);
@@ -974,9 +979,10 @@
         root.style.setProperty("--sun-opacity", Math.max(0.08, 0.28 - latestProgress * 0.14).toFixed(3));
         root.style.setProperty("--ground-drop", `${(latestProgress * 72).toFixed(2)}vh`);
         root.style.setProperty("--site-drop", `${(latestProgress * 88).toFixed(2)}vh`);
-        root.style.setProperty("--bird-rise", `${(latestProgress * -26).toFixed(2)}vh`);
-        root.style.setProperty("--cloud-shift", `${(latestProgress * -62).toFixed(2)}vh`);
-        root.style.setProperty("--high-cloud-shift", `${(latestProgress * -15).toFixed(2)}vh`);
+        root.style.setProperty("--bird-rise", `${birdOffset.toFixed(2)}vh`);
+        root.style.setProperty("--cloud-shift", `${lowerCloudOffset.toFixed(2)}vh`);
+        root.style.setProperty("--high-cloud-shift", `${highCloudOffset.toFixed(2)}vh`);
+        root.style.setProperty("--flight-shift", `${flightOffset.toFixed(2)}vh`);
         root.style.setProperty("--sky-top", color([116, 198, 246], [4, 8, 24], darkness));
         root.style.setProperty("--sky-mid", color([199, 236, 255], [13, 24, 56], darkness));
         root.style.setProperty("--sky-bottom", color([244, 251, 255], [38, 75, 119], darkness));
